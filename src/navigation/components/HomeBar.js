@@ -1,8 +1,8 @@
 import { StyleSheet, View, Pressable } from 'react-native';
 import { Appbar, IconButton, Avatar, Text } from 'react-native-paper';
 
-import { Icon } from '../../components';
-import { GlobalStyles } from '../../constants';
+import { Icon } from '~/components';
+import { GlobalStyles } from '~/constants';
 
 export default function HomeBar({ navigation }) {
   function handlePressCart() {
@@ -44,7 +44,6 @@ export default function HomeBar({ navigation }) {
           </View>
         }
       />
-
       <IconButton
         icon={({ color, size }) => (
           <Icon name="cart" color={color} size={size} />

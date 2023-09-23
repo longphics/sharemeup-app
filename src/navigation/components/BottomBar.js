@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import { BottomNavigation } from 'react-native-paper';
 
-import { GlobalStyles } from '../../constants';
+import { GlobalStyles } from '~/constants';
 
 export default function HomeTabBar({ navigation, state, descriptors, insets }) {
   return (

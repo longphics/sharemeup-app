@@ -3,8 +3,9 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 
-import { Cart } from '../screens';
-import { GlobalStyles } from '../constants';
+import { Cart } from '~/screens';
+import { GlobalStyles } from '~/constants';
+
 import { HeaderBar } from './components';
 import HomeTab from './HomeTab';
 

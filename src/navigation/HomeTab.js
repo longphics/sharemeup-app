@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Icon } from '../components';
-import { GlobalStyles } from '../constants';
-import { Home, Orders, Community, Messages, Menu } from '../screens';
+import { Icon } from '~/components';
+import { GlobalStyles } from '~/constants';
+import { Home, Orders, Community, Messages, Menu } from '~/screens';
+
 import { HeaderBar, BottomBar, HomeBar } from './components';
 
 const Tab = createBottomTabNavigator();

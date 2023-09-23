@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Appbar, IconButton } from 'react-native-paper';
 
-import { Icon } from '../../components';
-import { GlobalStyles } from '../../constants';
+import { Icon } from '~/components';
+import { GlobalStyles } from '~/constants';
 
 export default function HeaderBar({ navigation, options, back }) {
   return (
