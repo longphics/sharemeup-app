@@ -17,7 +17,7 @@ export default function HeaderBar({ navigation, options, back }) {
           )}
           onPress={navigation.goBack}
           iconColor={GlobalStyles.colors.onSurface}
-          style={styles.button}
+          style={styles.backButton}
         />
       ) : null}
       <Appbar.Content
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   titleText: {
     color: GlobalStyles.colors.onSurface,
   },
-  button: {
+  backButton: {
     marginHorizontal: 12,
   },
 });

@@ -46,11 +46,19 @@ export default function HomeBar({ navigation }) {
       />
       <IconButton
         icon={({ color, size }) => (
+          <Icon name="search" color={color} size={size} />
+        )}
+        onPress={() => {}}
+        iconColor={GlobalStyles.colors.onSurface}
+        style={styles.middleButton}
+      />
+      <IconButton
+        icon={({ color, size }) => (
           <Icon name="cart" color={color} size={size} />
         )}
         onPress={handlePressCart}
         iconColor={GlobalStyles.colors.onSurface}
-        style={styles.button}
+        style={styles.rightButton}
       />
     </Appbar.Header>
   );
@@ -62,8 +70,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   image: {
-    marginLeft: 16,
-    marginRight: 16,
+    marginHorizontal: 16,
   },
   pressed: {
     opacity: 0.85,
@@ -78,7 +85,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  button: {
-    marginHorizontal: 12,
+  middleButton: {
+    marginHorizontal: 2,
+  },
+  rightButton: {
+    marginLeft: 2,
+    marginRight: 12,
   },
 });
