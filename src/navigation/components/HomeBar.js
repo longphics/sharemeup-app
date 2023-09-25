@@ -5,9 +5,9 @@ import { Icon } from '~/components';
 import { GlobalStyles } from '~/constants';
 
 export default function HomeBar({ navigation }) {
-  function handlePressCart() {
+  const handlePressCart = () => {
     navigation.navigate('Cart');
-  }
+  };
 
   return (
     <Appbar.Header style={styles.topBar} mode="small">

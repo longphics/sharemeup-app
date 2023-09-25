@@ -3,7 +3,7 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 
-import { Cart } from '~/screens';
+import { ItemDetails, Cart } from '~/screens';
 import { GlobalStyles } from '~/constants';
 
 import { HeaderBar } from './components';
@@ -28,6 +28,13 @@ export default function MainStack() {
         component={HomeTab}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{
+          title: 'Item Details',
         }}
       />
       <Stack.Screen
