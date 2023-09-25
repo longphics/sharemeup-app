@@ -27,6 +27,10 @@ import StarFill from '~/assets/icons/star-fill.svg';
 import StarHalf from '~/assets/icons/star-half.svg';
 import Location from '~/assets/icons/location.svg';
 import LocationFill from '~/assets/icons/location-fill.svg';
+import Calendar from '~/assets/icons/calendar.svg';
+import CalendarFill from '~/assets/icons/calendar-fill.svg';
+import Add from '~/assets/icons/add.svg';
+import Minus from '~/assets/icons/minus.svg';
 
 export default function Icon({ name, color, size, style }) {
   const containerStyle = {
@@ -65,6 +69,10 @@ export default function Icon({ name, color, size, style }) {
     'star-half': StarHalf,
     'location': Location,
     'location-fill': LocationFill,
+    'calendar': Calendar,
+    'calendar-fill': CalendarFill,
+    'add': Add,
+    'minus': Minus,
   };
 
   const Component = Icons[name];

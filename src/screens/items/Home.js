@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import { useCategories, useItems } from '~/contexts';
-import { Stars } from '~/components';
 
-import { FilterBar } from './components/FilterBar';
-import { ItemList } from './components/ItemList';
+import { FilterBar, ItemList } from './components';
 
 export default function Home({ navigation }) {
   const CategoriesCtx = useCategories();

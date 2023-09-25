@@ -40,8 +40,8 @@ export default function Item({
             <Stars star={star} size={16} />
           </View>
           <View style={styles.line3}>
-            <Text variant="labelSmall" style={[styles.text, styles.fadeText]}>
-              {sold}K sold
+            <Text variant="labelSmall" style={styles.text}>
+              {sold} sold
             </Text>
           </View>
           <View style={styles.line4}>
@@ -52,12 +52,12 @@ export default function Item({
                 color={GlobalStyles.colors.error}
                 size={16}
               />
-              <Text variant="labelSmall" style={[styles.text, styles.fadeText]}>
+              <Text variant="labelSmall" style={styles.text}>
                 {address}
               </Text>
             </View>
             <View styles={styles.stockContainer}>
-              <Text variant="labelSmall" style={[styles.text, styles.fadeText]}>
+              <Text variant="labelSmall" style={styles.text}>
                 Stock: {stock}
               </Text>
             </View>
@@ -118,8 +118,5 @@ const styles = StyleSheet.create({
   stockContainer: {},
   text: {
     color: GlobalStyles.colors.onSurface,
-  },
-  fadeText: {
-    opacity: 0.85,
   },
 });

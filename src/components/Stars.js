@@ -8,15 +8,8 @@ export default function Stars({
   star,
   color = GlobalStyles.colors.primary,
   size = 24,
+  style,
 }) {
-  const iconStyle = {
-    width: size,
-    height: size,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  };
-
   const integer = Math.floor(star);
 
   let icons = [];
@@ -39,7 +32,7 @@ export default function Stars({
     );
   }
 
-  return <View style={styles.container}>{icons}</View>;
+  return <View style={[styles.container, style]}>{icons}</View>;
 }
 
 const styles = StyleSheet.create({
