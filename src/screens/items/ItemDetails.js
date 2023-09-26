@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import { useItems } from '~/contexts';
 
@@ -9,12 +10,14 @@ export default function ItemDetails({ navigation, route }) {
   const itemsCtx = useItems();
   const item = itemsCtx.items.filter((item) => item.id === route.params.id)[0];
 
+  const focus = useIsFocused();
+
   useEffect(() => {
     navigation.setOptions({
       title: item.name,
       hasCart: true,
     });
-  }, [navigation]);
+  }, [focus, navigation]);
 
   const itemInfoProps = {
     name: item.name,

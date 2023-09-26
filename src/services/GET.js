@@ -19,3 +19,12 @@ export async function fetchItems() {
   });
   return res;
 }
+
+export async function fetchStores() {
+  console.log('Fetch stores');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/stores',
+  });
+  return res;
+}

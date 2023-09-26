@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import Item from './Item';
 
@@ -8,24 +8,22 @@ const renderItem = (itemData) => {
 
 export default function ItemList({ items, onPress }) {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {items.map((item, index) => {
-          const props = {
-            id: item.id,
-            name: item.name,
-            image: item.images[0],
-            address: item.store.address,
-            sold: item.sold,
-            star: item.star,
-            stock: item.stock,
-          };
-          return (
-            <Item {...props} index={index} key={item.id} onPress={onPress} />
-          );
-        })}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      {items.map((item, index) => {
+        const props = {
+          id: item.id,
+          name: item.name,
+          image: item.images[0],
+          address: item.store.address,
+          sold: item.sold,
+          star: item.star,
+          stock: item.stock,
+        };
+        return (
+          <Item {...props} index={index} key={item.id} onPress={onPress} />
+        );
+      })}
+    </View>
   );
 }
 

@@ -1,12 +1,17 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Text, Avatar, Button } from 'react-native-paper';
 
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
 export default function StoreInfo({ id, name, avatar, address }) {
+  const navigation = useNavigation();
+
   const handlePressStore = () => {
-    console.log('View store');
+    navigation.navigate('StoreDetails', {
+      id,
+    });
   };
 
   return (

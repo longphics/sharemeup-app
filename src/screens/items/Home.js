@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 
 import { useCategories, useItems } from '~/contexts';
 
@@ -8,12 +7,6 @@ import { FilterBar, ItemList } from './components';
 export default function Home({ navigation }) {
   const CategoriesCtx = useCategories();
   const ItemsCtx = useItems();
-
-  useEffect(() => {
-    CategoriesCtx.refresh();
-    ItemsCtx.refresh();
-  }, []);
-
   const categories = CategoriesCtx.categories.map((category) => category.name);
   const items = ItemsCtx.items;
 
@@ -33,7 +26,9 @@ export default function Home({ navigation }) {
         categories={categories}
         onPressCategory={handlePressCategory}
       />
-      <ItemList items={items} onPress={handlePressItem} />
+      <ScrollView>
+        <ItemList items={items} onPress={handlePressItem} />
+      </ScrollView>
     </View>
   );
 }
