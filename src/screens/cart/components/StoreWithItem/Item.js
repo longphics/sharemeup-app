@@ -11,14 +11,14 @@ export default function Item({ item_user, onPressAdd, onPressMinus }) {
   const item = item_user.item;
 
   const handlePressAdd = () => {
-    console.log('Add');
+    onPressAdd(item.id);
     setAmount((prev) => {
       return prev + 1;
     });
   };
 
   const handlePressMinus = () => {
-    console.log('Minus');
+    onPressMinus(item.id);
     setAmount((prev) => {
       if (prev === 0) {
         return prev;

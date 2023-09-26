@@ -1,12 +1,29 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { Button } from 'react-native-paper';
 
 import { useUser } from '~/contexts';
 
 import { StoreWithItem } from './components';
+import { useState } from 'react';
 
 export default function Cart() {
-  const handlePressSelect = (data) => {
-    log(data);
+  const [checkedStoreId, setCheckedStoredId] = useState();
+
+  const handlePressSelect = (storeId) => {
+    // console.log(storeId);
+    setCheckedStoredId(storeId);
+  };
+
+  const handlePressAdd = (itemId) => {
+    console.log(itemId);
+  };
+
+  const handlePressMinus = (itemId) => {
+    console.log(itemId);
+  };
+
+  const handleCheckout = () => {
+    console.log('Checkout');
   };
 
   const UserCtx = useUser();
@@ -28,11 +45,19 @@ export default function Cart() {
               storeId={storeId}
               item_user_s={item_user_s_groups[storeId]}
               key={storeId}
-              handlePressSelect={handlePressSelect}
+              onPressSelect={handlePressSelect}
+              onPressAdd={handlePressAdd}
+              onPressMinus={handlePressMinus}
+              checkedStoreId={checkedStoreId}
             />
           );
         })}
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <Button mode="contained" onPress={handleCheckout}>
+          Checkout
+        </Button>
+      </View>
     </View>
   );
 }
@@ -40,5 +65,8 @@ export default function Cart() {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+  },
+  buttonContainer: {
+    padding: 12,
   },
 });
