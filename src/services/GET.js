@@ -37,3 +37,12 @@ export async function fetchUser() {
   });
   return res;
 }
+
+export async function fetchOrders() {
+  console.log('Fetch orders');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/orders',
+  });
+  return res;
+}

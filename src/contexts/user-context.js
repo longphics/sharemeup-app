@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 import { fetchUser } from '~/services';
 
 export const UserContext = createContext({
-  user: [],
+  user: {},
   refresh: () => {},
 });
 

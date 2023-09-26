@@ -4,6 +4,7 @@ import { CategoriesContext } from './categories-context';
 import { ItemsContext } from './items-context';
 import { StoresContext } from './stores-context';
 import { UserContext } from './user-context';
+import { OrdersContext } from './orders-context';
 
 export function useCategories() {
   return useContext(CategoriesContext);
@@ -19,4 +20,8 @@ export function useStores() {
 
 export function useUser() {
   return useContext(UserContext);
+}
+
+export function useOrders() {
+  return useContext(OrdersContext);
 }

@@ -3,12 +3,13 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 
-import { ItemDetails, StoreDetails, Cart } from '~/screens';
+import { ItemDetails, StoreDetails, OrderDetails, Cart } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
 
 import { HeaderBar } from './components';
 import HomeTab from './HomeTab';
+import StoreTab from './StoreTab';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,13 @@ export default function MainStack() {
         }}
       />
       <Stack.Screen
+        name="StoreTab"
+        component={StoreTab}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="ItemDetails"
         component={ItemDetails}
         options={{
@@ -46,6 +54,14 @@ export default function MainStack() {
           title: 'Store Details',
         }}
       />
+      <Stack.Screen
+        name="OrderDetails"
+        component={OrderDetails}
+        options={{
+          title: 'Order Details',
+        }}
+      />
+
       <Stack.Screen
         name="Cart"
         component={Cart}

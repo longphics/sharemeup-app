@@ -4,13 +4,13 @@ import { Avatar, Text, Button } from 'react-native-paper';
 import { Icon, VerticalLine } from '~/components';
 import { GlobalStyles } from '~/constants';
 
-export default function StoreHeader({ store }) {
-  const handlePressFollow = () => {
-    console.log('Follow');
+export default function StoreHeader({ store, onPressEdit, onPressDonation }) {
+  const handlePressEdit = () => {
+    onPressEdit();
   };
 
-  const handlePressDonate = () => {
-    console.log('Donate');
+  const handlePressDonation = () => {
+    onPressDonation();
   };
 
   return (
@@ -50,10 +50,10 @@ export default function StoreHeader({ store }) {
         <View style={styles.par1_col2}>
           <Button
             mode="contained-tonal"
-            onPress={handlePressFollow}
+            onPress={handlePressEdit}
             textColor={GlobalStyles.colors.primary}
           >
-            Follow
+            Edit
           </Button>
         </View>
       </View>
@@ -72,10 +72,10 @@ export default function StoreHeader({ store }) {
         </View>
         <View style={styles.part2_col3}>
           <Button
-            onPress={handlePressDonate}
+            onPress={handlePressDonation}
             textColor={GlobalStyles.colors.tertiary}
           >
-            Donate
+            Donation
           </Button>
         </View>
       </View>

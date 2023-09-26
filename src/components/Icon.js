@@ -29,10 +29,11 @@ import Location from '~/assets/icons/location.svg';
 import LocationFill from '~/assets/icons/location-fill.svg';
 import Calendar from '~/assets/icons/calendar.svg';
 import CalendarFill from '~/assets/icons/calendar-fill.svg';
-import Add from '~/assets/icons/add.svg';
+import Plus from '~/assets/icons/plus.svg';
 import Minus from '~/assets/icons/minus.svg';
 import Store from '~/assets/icons/store.svg';
 import StoreFill from '~/assets/icons/store-fill.svg';
+import Add from '~/assets/icons/add.svg';
 
 export default function Icon({ name, color, size, style }) {
   const containerStyle = {
@@ -73,10 +74,11 @@ export default function Icon({ name, color, size, style }) {
     'location-fill': LocationFill,
     'calendar': Calendar,
     'calendar-fill': CalendarFill,
-    'add': Add,
+    'plus': Plus,
     'minus': Minus,
     'store': Store,
     'store-fill': StoreFill,
+    'add': Add,
   };
 
   const Component = Icons[name];

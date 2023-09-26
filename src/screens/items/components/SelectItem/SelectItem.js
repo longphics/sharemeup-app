@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { IconButton, Text, SegmentedButtons, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
-import { Icon, ButtonAddMinus } from '~/components';
+import { ButtonAddMinus } from '~/components';
 import { GlobalStyles } from '~/constants';
 
 export default function SelectItem() {

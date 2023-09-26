@@ -21,7 +21,7 @@ export default function ButtonAddMinus({ amount, onPressAdd, onPressMinus }) {
       </Text>
       <IconButton
         icon={({ color, size }) => (
-          <Icon name="add" size={size} color={color} />
+          <Icon name="plus" size={size} color={color} />
         )}
         iconColor={GlobalStyles.colors.primary}
         size={32}

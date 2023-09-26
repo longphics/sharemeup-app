@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function OrderDetails() {
+export default function OrderDetails({ route }) {
   return (
     <View style={styles.screenContainer}>
-      <Text>Order Details</Text>
+      <Text>Order Details: {route.params.id}</Text>
     </View>
   );
 }
