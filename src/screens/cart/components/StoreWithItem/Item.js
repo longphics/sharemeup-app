@@ -33,7 +33,7 @@ export default function Item({ item_user, onPressAdd, onPressMinus }) {
       <View style={styles.infoContainer}>
         <View style={styles.textContainer}>
           <Text style={[styles.text, { fontWeight: 'bold' }]}>{item.name}</Text>
-          <Text>{amount} items</Text>
+          <Text style={{ marginTop: 6 }}>{amount} items</Text>
         </View>
         <ButtonAddMinus
           amount={amount}
