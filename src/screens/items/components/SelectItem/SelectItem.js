@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton, Text, SegmentedButtons, Button } from 'react-native-paper';
 
-import { Icon } from '~/components';
+import { Icon, ButtonAddMinus } from '~/components';
 import { GlobalStyles } from '~/constants';
 
 export default function SelectItem() {
@@ -35,24 +35,10 @@ export default function SelectItem() {
   return (
     <View style={styles.container}>
       <View style={styles.adjustContainer}>
-        <IconButton
-          icon={({ color, size }) => (
-            <Icon name="add" size={size} color={color} />
-          )}
-          iconColor={GlobalStyles.colors.primary}
-          size={32}
-          onPress={handlePressAdd}
-        />
-        <Text variant="bodyLarge" style={{ fontWeight: 'bold' }}>
-          {amount}
-        </Text>
-        <IconButton
-          icon={({ color, size }) => (
-            <Icon name="minus" size={size} color={color} />
-          )}
-          iconColor={GlobalStyles.colors.primary}
-          size={32}
-          onPress={handlePressMinus}
+        <ButtonAddMinus
+          amount={amount}
+          onPressAdd={handlePressAdd}
+          onPressMinus={handlePressMinus}
         />
         <View style={styles.buttonContainer}>
           <Button

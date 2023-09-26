@@ -41,7 +41,7 @@ export default function StoreInfo({ id, name, avatar, address }) {
         <View style={{ width: 120 }}>
           <Button
             icon={({ color, size }) => (
-              <Icon name="home" color={color} size={size} />
+              <Icon name="store" color={color} size={size} />
             )}
             onPress={handlePressStore}
           >

@@ -31,6 +31,8 @@ import Calendar from '~/assets/icons/calendar.svg';
 import CalendarFill from '~/assets/icons/calendar-fill.svg';
 import Add from '~/assets/icons/add.svg';
 import Minus from '~/assets/icons/minus.svg';
+import Store from '~/assets/icons/store.svg';
+import StoreFill from '~/assets/icons/store-fill.svg';
 
 export default function Icon({ name, color, size, style }) {
   const containerStyle = {
@@ -73,6 +75,8 @@ export default function Icon({ name, color, size, style }) {
     'calendar-fill': CalendarFill,
     'add': Add,
     'minus': Minus,
+    'store': Store,
+    'store-fill': StoreFill,
   };
 
   const Component = Icons[name];
