@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 
 import { useOrders } from '~/contexts';
 
 import { StoreWithItem } from './components';
 
-export default function OrdersOrders() {
-  const navigation = useNavigation();
-
+export default function OrdersOrders({ navigation }) {
   const handlePressCancel = (oderId) => {
     console.log('Cancel', oderId);
   };
@@ -31,7 +28,11 @@ export default function OrdersOrders() {
 
   const [tab, setTab] = useState('Waiting');
 
-  const orders = useOrders().orders.filter((order) => order.status === tab);
+  const authId = 'user3';
+  const myOrders = useOrders().orders.filter(
+    (order) => order.userId === authId,
+  );
+  const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 
   return (
     <View style={styles.screenContainer}>
@@ -48,7 +49,7 @@ export default function OrdersOrders() {
       />
 
       <ScrollView>
-        {orders.map((order) => {
+        {myDisplayOrders.map((order) => {
           let handlePressButton;
           if (order.status === 'Waiting') {
             handlePressButton = handlePressCancel;

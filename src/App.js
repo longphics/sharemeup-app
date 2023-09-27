@@ -6,7 +6,7 @@ import {
   useCategories,
   useItems,
   useStores,
-  useUser,
+  useUsers,
   useOrders,
 } from './contexts';
 
@@ -14,14 +14,14 @@ export default function App() {
   const CategoriesCtx = useCategories();
   const ItemsCtx = useItems();
   const StoresCtx = useStores();
-  const UserCtx = useUser();
+  const UsersCtx = useUsers();
   const OrdersCtx = useOrders();
 
   useEffect(() => {
     CategoriesCtx.refresh();
     ItemsCtx.refresh();
     StoresCtx.refresh();
-    UserCtx.refresh();
+    UsersCtx.refresh();
     OrdersCtx.refresh();
   }, []);
 

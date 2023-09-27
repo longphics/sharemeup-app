@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { CategoriesContext } from './categories-context';
 import { ItemsContext } from './items-context';
 import { StoresContext } from './stores-context';
-import { UserContext } from './user-context';
+import { UsersContext } from './users-context';
 import { OrdersContext } from './orders-context';
 
 export function useCategories() {
@@ -18,8 +18,8 @@ export function useStores() {
   return useContext(StoresContext);
 }
 
-export function useUser() {
-  return useContext(UserContext);
+export function useUsers() {
+  return useContext(UsersContext);
 }
 
 export function useOrders() {

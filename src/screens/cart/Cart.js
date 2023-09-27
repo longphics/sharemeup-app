@@ -1,7 +1,7 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 
-import { useUser } from '~/contexts';
+import { useUsers } from '~/contexts';
 
 import { StoreWithItem } from './components';
 import { useState } from 'react';
@@ -10,7 +10,6 @@ export default function Cart() {
   const [checkedStoreId, setCheckedStoredId] = useState();
 
   const handlePressSelect = (storeId) => {
-    // console.log(storeId);
     setCheckedStoredId(storeId);
   };
 
@@ -26,8 +25,12 @@ export default function Cart() {
     console.log('Checkout');
   };
 
-  const UserCtx = useUser();
-  const item_user_s = UserCtx.user.item_user;
+  const users = useUsers().users;
+
+  const authId = 'user3';
+  const user = users.filter((user) => user.id === authId)[0];
+
+  const item_user_s = user.item_user;
 
   const item_user_s_groups = item_user_s.reduce((x, y) => {
     (x[y.item.store.id] = x[y.item.store.id] || []).push(y);
