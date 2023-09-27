@@ -5,10 +5,10 @@ import { Text } from 'react-native-paper';
 import { ButtonAddMinus } from '~/components';
 import { GlobalStyles } from '~/constants';
 
-export default function Item({ item_user, onPressAdd, onPressMinus }) {
-  const [amount, setAmount] = useState(item_user.amount);
+export default function Item({ cartElement, onPressAdd, onPressMinus }) {
+  const [amount, setAmount] = useState(cartElement.amount);
 
-  const item = item_user.item;
+  const item = cartElement.item;
 
   const handlePressAdd = () => {
     onPressAdd(item.id);

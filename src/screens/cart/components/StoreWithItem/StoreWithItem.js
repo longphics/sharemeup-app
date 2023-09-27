@@ -7,7 +7,7 @@ import Store from './Store';
 
 export default function StoreWithItem({
   storeId,
-  item_user_s,
+  cartElements,
   onPressSelect,
   onPressAdd,
   onPressMinus,
@@ -25,11 +25,11 @@ export default function StoreWithItem({
         checkedStoreId={checkedStoreId}
       />
 
-      {item_user_s.map((item_user) => {
+      {cartElements.map((cartElement) => {
         return (
           <Item
-            item_user={item_user}
-            key={item_user.item.id}
+            cartElement={cartElement}
+            key={cartElement.item.id}
             onPressAdd={onPressAdd}
             onPressMinus={onPressMinus}
           />

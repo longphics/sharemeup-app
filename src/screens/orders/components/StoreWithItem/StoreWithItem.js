@@ -65,13 +65,13 @@ export default function StoreWithItem({ order, onPressButton, onPressDetail }) {
           onPressDetail={onPressDetail}
         />
 
-        {order.item_order.map((item_order) => {
-          const item = item_order.item;
+        {order.orderElements.map((orderElement) => {
+          const item = orderElement.item;
           return (
             <Item
               name={item.name}
               image={item.images[0]}
-              amount={item_order.amount}
+              amount={orderElement.amount}
               key={item.id}
             />
           );

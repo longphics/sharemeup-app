@@ -30,14 +30,14 @@ export default function Cart() {
   const authId = 'user3';
   const user = users.filter((user) => user.id === authId)[0];
 
-  const item_user_s = user.item_user;
+  const cartElements = user.cartElements;
 
-  const item_user_s_groups = item_user_s.reduce((x, y) => {
+  const cartElements_groups = cartElements.reduce((x, y) => {
     (x[y.item.store.id] = x[y.item.store.id] || []).push(y);
     return x;
   }, {});
 
-  const storeIds = Object.keys(item_user_s_groups);
+  const storeIds = Object.keys(cartElements_groups);
 
   return (
     <View style={styles.screenContainer}>
@@ -46,7 +46,7 @@ export default function Cart() {
           return (
             <StoreWithItem
               storeId={storeId}
-              item_user_s={item_user_s_groups[storeId]}
+              cartElements={cartElements_groups[storeId]}
               key={storeId}
               onPressSelect={handlePressSelect}
               onPressAdd={handlePressAdd}
