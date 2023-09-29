@@ -4,7 +4,12 @@ import { Avatar, Text, Button } from 'react-native-paper';
 import { Icon, VerticalLine } from '~/components';
 import { GlobalStyles } from '~/constants';
 
-export default function StoreHeader({ store, onPressEdit, onPressDonation }) {
+export default function StoreHeader({
+  store,
+  phone,
+  onPressEdit,
+  onPressDonation,
+}) {
   const handlePressEdit = () => {
     onPressEdit();
   };
@@ -65,10 +70,8 @@ export default function StoreHeader({ store, onPressEdit, onPressDonation }) {
           </Text>
         </View>
         <View style={styles.part2_col2}>
-          <Text style={styles.text}>{store.owner.address}</Text>
-          <Text style={[styles.text, { marginTop: 4 }]}>
-            {store.owner.phone}
-          </Text>
+          <Text style={styles.text}>{store.address}</Text>
+          <Text style={[styles.text, { marginTop: 4 }]}>{phone}</Text>
         </View>
         <View style={styles.part2_col3}>
           <Button

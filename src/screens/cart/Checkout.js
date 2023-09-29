@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 
@@ -6,12 +6,21 @@ import { useMe } from '~/contexts';
 import { createOrder } from '~/services';
 
 import { StoreWithItemCheckout, CheckoutForm } from './components';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Checkout({ route }) {
+  const MeCtx = useMe();
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // MeCtx.refresh();
+  }, [isFocus]);
+
   const storeId = route.params.storeId;
   const cartElements = route.params.cartElements;
 
-  const me = useMe().me;
+  const me = MeCtx.me;
 
   const name = me.name;
   const [address, setAddress] = useState(me.address);

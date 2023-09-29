@@ -28,6 +28,7 @@ export default function App() {
     UsersCtx.refresh();
     OrdersCtx.refresh();
     CartCtx.refresh();
+
     MeCtx.refresh();
   }, []);
 

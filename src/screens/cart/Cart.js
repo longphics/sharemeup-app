@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 
@@ -6,12 +6,20 @@ import { useCart, useUsers } from '~/contexts';
 import { changeCartElement } from '~/utils';
 
 import { StoreWithItem } from './components';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Cart({ navigation }) {
-  const [checkedStoreId, setCheckedStoredId] = useState();
   const UsersCtx = useUsers();
-
   const CartCtx = useCart();
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // UsersCtx.refresh();
+    CartCtx.refresh();
+  }, [isFocus]);
+
+  const [checkedStoreId, setCheckedStoredId] = useState();
 
   const users = UsersCtx.users;
 

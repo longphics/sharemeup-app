@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Divider, Button } from 'react-native-paper';
+import { Divider, Button, Text } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
-import { useStores, useItems } from '~/contexts';
+import { useStores, useItems, useMe } from '~/contexts';
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
@@ -10,13 +11,27 @@ import { ItemList } from '../items/components';
 import { StoreHeader } from './components';
 
 export default function ManageStore({ navigation }) {
-  const userId = 'user1';
-
-  const store = useStores().stores.filter(
-    (store) => store.ownerId === userId,
-  )[0];
-
+  const MeCtx = useMe();
   const ItemsCtx = useItems();
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // MeCtx.refresh();
+    ItemsCtx.refresh();
+  }, [isFocus]);
+
+  const store = MeCtx.me.ownStore;
+  const phone = MeCtx.me.phone;
+
+  if (!store) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>You do not have your own store</Text>
+      </View>
+    );
+  }
+
   const items = ItemsCtx.items.filter((item) => item.storeId === store.id);
 
   useEffect(() => {
@@ -47,6 +62,7 @@ export default function ManageStore({ navigation }) {
       <ScrollView>
         <StoreHeader
           store={store}
+          phone={phone}
           onPressEdit={handlePressEdit}
           onPressDonation={handlePressDonation}
         />

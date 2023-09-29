@@ -1,12 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
-import { useOrders } from '~/contexts';
+import { useMe, useOrders } from '~/contexts';
 
 import { UserWithItem } from './components';
 
 export default function ManageOrders({ navigation }) {
+  const MeCtx = useMe();
+  const OrdersCtx = useOrders();
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // MeCtx.refresh();
+    OrdersCtx.refresh();
+  }, [isFocus]);
+
+  const [tab, setTab] = useState('Waiting');
+
+  const store = MeCtx.me.ownStore;
+
+  if (!store) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>You do not have your own store</Text>
+      </View>
+    );
+  }
+
+  const myStoreId = store.id;
+
+  const myStoreOrders = OrdersCtx.orders.filter(
+    (order) => order.storeId === myStoreId,
+  );
+
+  const myDisplayStoreOrders = myStoreOrders.filter(
+    (order) => order.status === tab,
+  );
+
   const handlePressCancel = (orderId) => {
     console.log('Cancel', orderId);
   };
@@ -21,16 +54,6 @@ export default function ManageOrders({ navigation }) {
       id: orderId,
     });
   };
-
-  const [tab, setTab] = useState('Waiting');
-
-  const authStoreId = 'store1(user1)';
-  const myStoreOrders = useOrders().orders.filter(
-    (order) => order.storeId === authStoreId,
-  );
-  const myDisplayStoreOrders = myStoreOrders.filter(
-    (order) => order.status === tab,
-  );
 
   return (
     <View style={styles.screenContainer}>

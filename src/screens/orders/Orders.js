@@ -1,12 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
-import { useOrders } from '~/contexts';
+import { useMe, useOrders } from '~/contexts';
 
 import { StoreWithItem } from './components';
 
 export default function OrdersOrders({ navigation }) {
+  const MeCtx = useMe();
+  const OrdersCtx = useOrders();
+
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // MeCtx.refresh();
+    OrdersCtx.refresh();
+  }, [isFocus]);
+
+  const [tab, setTab] = useState('Waiting');
+
+  const userId = MeCtx.me.id;
+
+  const orders = OrdersCtx.orders;
+
+  const myOrders = orders.filter((order) => order.userId === userId);
+
+  const myDisplayOrders = myOrders.filter((order) => order.status === tab);
+
   const handlePressCancel = (oderId) => {
     console.log('Cancel', oderId);
   };
@@ -25,14 +46,6 @@ export default function OrdersOrders({ navigation }) {
       id: orderId,
     });
   };
-
-  const [tab, setTab] = useState('Waiting');
-
-  const authId = 'user3';
-  const myOrders = useOrders().orders.filter(
-    (order) => order.userId === authId,
-  );
-  const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 
   return (
     <View style={styles.screenContainer}>

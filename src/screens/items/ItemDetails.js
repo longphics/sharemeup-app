@@ -8,20 +8,26 @@ import { changeCartElement } from '~/utils';
 import { FeedbackList, ItemInfo, StoreInfo, SelectItem } from './components';
 
 export default function ItemDetails({ navigation, route }) {
-  const itemsCtx = useItems();
-  const item = itemsCtx.items.filter((item) => item.id === route.params.id)[0];
-
+  const ItemsCtx = useItems();
   const CartCtx = useCart();
   const UsersCtx = useUsers();
 
-  const focus = useIsFocused();
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    // ItemsCtx.refresh();
+    // CartCtx.refresh();
+    // UsersCtx.refresh();
+  }, [isFocus]);
+
+  const item = ItemsCtx.items.filter((item) => item.id === route.params.id)[0];
 
   useEffect(() => {
     navigation.setOptions({
       title: item.name,
       hasCart: true,
     });
-  }, [focus, navigation]);
+  }, [isFocus, navigation]);
 
   const handlePressCart = (itemId, amount) => {
     changeCartElement(itemId, amount, CartCtx, UsersCtx);

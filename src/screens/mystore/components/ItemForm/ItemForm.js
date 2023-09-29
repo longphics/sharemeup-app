@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 
 import { useCategories } from '~/contexts';
@@ -47,7 +47,6 @@ export default function ItemForm({ onCreateItem }) {
   };
 
   const handleTakeImage = (imageUri) => {
-    console.log(imageUri);
     setImageUri(imageUri);
   };
 
@@ -65,7 +64,20 @@ export default function ItemForm({ onCreateItem }) {
       options,
       imageUri,
     };
-    onCreateItem(data);
+
+    if (
+      !name ||
+      !description ||
+      !stock ||
+      !dateString ||
+      !categoryId ||
+      !imageUri ||
+      options.length === 0
+    ) {
+      Alert.alert('Alert', 'Item data can not be empty');
+    } else {
+      onCreateItem(data);
+    }
   };
 
   return (
