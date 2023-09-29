@@ -4,7 +4,9 @@ import { fetchOrders } from '~/services';
 
 export const OrdersContext = createContext({
   orders: [],
-  refresh: () => {},
+  refresh: () => {
+    return new Promise();
+  },
 });
 
 export default function OrdersProvider({ children }) {

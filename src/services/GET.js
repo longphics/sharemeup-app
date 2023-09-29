@@ -51,3 +51,12 @@ export async function fetchOrders() {
   });
   return res;
 }
+
+export async function fetchCart() {
+  console.log('Fetch cart');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/users/cart',
+  });
+  return res;
+}

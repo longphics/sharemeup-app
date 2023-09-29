@@ -1,9 +1,18 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-export default function CreateItem() {
+import { createItem } from '~/services';
+
+import { ItemForm } from './components';
+
+export default function CreateItem({ navigation }) {
+  const handleCreateItem = (data) => {
+    createItem(data);
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={styles.screenContainer}>
-      <Text>Create Item</Text>
+      <ItemForm onCreateItem={handleCreateItem} />
     </View>
   );
 }

@@ -39,6 +39,7 @@ export default function ManageStore({ navigation }) {
 
   const handlePressAddNewItem = () => {
     console.log('Add new item');
+    navigation.navigate('CreateItem');
   };
 
   return (

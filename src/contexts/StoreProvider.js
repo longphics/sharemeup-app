@@ -3,6 +3,7 @@ import ItemsProvider from './items-context';
 import StoresProvider from './stores-context';
 import UsersProvider from './users-context';
 import OrdersProvider from './orders-context';
+import CartProvider from './cart-context';
 
 export default function StoreProvider({ children }) {
   return (
@@ -10,7 +11,9 @@ export default function StoreProvider({ children }) {
       <ItemsProvider>
         <StoresProvider>
           <UsersProvider>
-            <OrdersProvider>{children}</OrdersProvider>
+            <OrdersProvider>
+              <CartProvider>{children}</CartProvider>
+            </OrdersProvider>
           </UsersProvider>
         </StoresProvider>
       </ItemsProvider>

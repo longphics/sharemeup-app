@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Alert, Image, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import { ButtonAddMinus } from '~/components';
@@ -9,22 +9,43 @@ export default function Item({ cartElement, onPressAdd, onPressMinus }) {
   const [amount, setAmount] = useState(cartElement.amount);
 
   const item = cartElement.item;
+  const stock = item.stock;
 
   const handlePressAdd = () => {
-    onPressAdd(item.id);
-    setAmount((prev) => {
-      return prev + 1;
-    });
+    if (amount === stock) {
+      Alert.alert('Alert', 'Over stock');
+    } else {
+      onPressAdd(item.id, amount + 1);
+      setAmount((prev) => {
+        return prev + 1;
+      });
+    }
   };
 
   const handlePressMinus = () => {
-    onPressMinus(item.id);
-    setAmount((prev) => {
-      if (prev === 0) {
-        return prev;
-      }
-      return prev - 1;
-    });
+    if (amount === 0) {
+      return;
+    } else if (amount === 1) {
+      Alert.alert('Confirm', 'Do you want to delete this item', [
+        {
+          text: 'Yes',
+          onPress: () => {
+            onPressMinus(item.id, amount - 1);
+            setAmount((prev) => {
+              return prev - 1;
+            });
+          },
+        },
+        {
+          text: 'No',
+        },
+      ]);
+    } else {
+      onPressMinus(item.id, amount - 1);
+      setAmount((prev) => {
+        return prev - 1;
+      });
+    }
   };
 
   return (

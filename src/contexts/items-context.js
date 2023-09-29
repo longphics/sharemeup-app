@@ -4,7 +4,9 @@ import { fetchItems } from '~/services';
 
 export const ItemsContext = createContext({
   items: [],
-  refresh: () => {},
+  refresh: () => {
+    return new Promise();
+  },
 });
 
 export default function ItemsProvider({ children }) {

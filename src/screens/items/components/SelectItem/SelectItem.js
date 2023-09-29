@@ -1,35 +1,40 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { ButtonAddMinus } from '~/components';
 import { GlobalStyles } from '~/constants';
 
-export default function SelectItem() {
-  const [amount, setAmount] = useState(0);
-  const [action, setAction] = useState();
+export default function SelectItem({
+  itemId,
+  stock,
+  onPressCart,
+  onPressPick,
+}) {
+  const [amount, setAmount] = useState(1);
 
   const handlePressAdd = () => {
-    console.log('Add');
-    setAmount((prev) => prev + 1);
+    if (amount === stock) {
+      Alert.alert('Alert', 'Over stock');
+    } else {
+      setAmount((prev) => prev + 1);
+    }
   };
 
   const handlePressMinus = () => {
-    console.log('Minus');
-    setAmount((prev) => {
-      if (prev == 0) {
-        return 0;
-      }
-      return prev - 1;
-    });
+    if (amount === 1) {
+      return;
+    } else {
+      setAmount((prev) => prev - 1);
+    }
   };
 
   const handlePressCart = () => {
-    console.log('Add to cart');
+    onPressCart(itemId, amount);
   };
 
   const handlePressPick = () => {
-    console.log('Pick now');
+    onPressPick(itemId, amount);
   };
 
   return (

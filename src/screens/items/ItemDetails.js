@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useItems } from '~/contexts';
+import { useCart, useItems, useUsers } from '~/contexts';
+import { changeCartElement } from '~/utils';
 
 import { FeedbackList, ItemInfo, StoreInfo, SelectItem } from './components';
 
 export default function ItemDetails({ navigation, route }) {
   const itemsCtx = useItems();
   const item = itemsCtx.items.filter((item) => item.id === route.params.id)[0];
+
+  const CartCtx = useCart();
+  const UsersCtx = useUsers();
 
   const focus = useIsFocused();
 
@@ -18,6 +22,14 @@ export default function ItemDetails({ navigation, route }) {
       hasCart: true,
     });
   }, [focus, navigation]);
+
+  const handlePressCart = (itemId, amount) => {
+    changeCartElement(itemId, amount, CartCtx, UsersCtx);
+  };
+
+  const handlePressPick = (itemId, amount) => {
+    console.log('Pick', itemId, amount);
+  };
 
   const itemInfoProps = {
     name: item.name,
@@ -50,7 +62,12 @@ export default function ItemDetails({ navigation, route }) {
         <StoreInfo {...storeInfoProps} />
         <FeedbackList {...feedbackListProps} />
       </ScrollView>
-      <SelectItem />
+      <SelectItem
+        itemId={item.id}
+        stock={item.stock}
+        onPressCart={handlePressCart}
+        onPressPick={handlePressPick}
+      />
     </View>
   );
 }

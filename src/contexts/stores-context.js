@@ -4,7 +4,9 @@ import { fetchStores } from '~/services';
 
 export const StoresContext = createContext({
   stores: [],
-  refresh: () => {},
+  refresh: () => {
+    return new Promise();
+  },
 });
 
 export default function StoresProvider({ children }) {

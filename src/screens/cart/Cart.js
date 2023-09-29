@@ -1,36 +1,53 @@
+import { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 
-import { useUsers } from '~/contexts';
+import { useCart, useUsers } from '~/contexts';
+import { changeCartElement } from '~/utils';
 
 import { StoreWithItem } from './components';
-import { useState } from 'react';
 
 export default function Cart() {
   const [checkedStoreId, setCheckedStoredId] = useState();
+  const UsersCtx = useUsers();
+
+  const CartCtx = useCart();
 
   const handlePressSelect = (storeId) => {
     setCheckedStoredId(storeId);
   };
 
-  const handlePressAdd = (itemId) => {
-    console.log(itemId);
+  const handlePressAdd = async (itemId, amount) => {
+    changeCartElement(itemId, amount, CartCtx, UsersCtx);
   };
 
-  const handlePressMinus = (itemId) => {
-    console.log(itemId);
+  const handlePressMinus = async (itemId, amount) => {
+    changeCartElement(itemId, amount, CartCtx, UsersCtx);
   };
 
   const handleCheckout = () => {
     console.log('Checkout');
   };
 
-  const users = useUsers().users;
+  const users = UsersCtx.users;
 
   const authId = 'user3';
   const user = users.filter((user) => user.id === authId)[0];
 
   const cartElements = user.cartElements;
+
+  if (!cartElements.length) {
+    return (
+      <View
+        style={[
+          styles.screenContainer,
+          { justifyContent: 'center', alignItems: 'center' },
+        ]}
+      >
+        <Text variant="bodyLarge">Cart is empty</Text>
+      </View>
+    );
+  }
 
   const cartElements_groups = cartElements.reduce((x, y) => {
     (x[y.item.store.id] = x[y.item.store.id] || []).push(y);

@@ -3,7 +3,13 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack';
 
-import { ItemDetails, StoreDetails, OrderDetails, Cart } from '~/screens';
+import {
+  ItemDetails,
+  StoreDetails,
+  OrderDetails,
+  Cart,
+  CreateItem,
+} from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
 
@@ -61,12 +67,18 @@ export default function MainStack() {
           title: 'Order Details',
         }}
       />
-
       <Stack.Screen
         name="Cart"
         component={Cart}
         options={{
           title: 'Cart',
+        }}
+      />
+      <Stack.Screen
+        name="CreateItem"
+        component={CreateItem}
+        options={{
+          title: 'New Item',
         }}
       />
     </Stack.Navigator>

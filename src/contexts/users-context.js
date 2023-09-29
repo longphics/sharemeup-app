@@ -4,7 +4,9 @@ import { fetchUsers } from '~/services';
 
 export const UsersContext = createContext({
   users: [],
-  refresh: () => {},
+  refresh: () => {
+    return new Promise();
+  },
 });
 
 export default function UsersProvider({ children }) {

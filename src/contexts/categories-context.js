@@ -4,7 +4,9 @@ import { fetchCategories } from '~/services';
 
 export const CategoriesContext = createContext({
   categories: [],
-  refresh: () => {},
+  refresh: () => {
+    return new Promise();
+  },
 });
 
 export default function CategoriesProvider({ children }) {
