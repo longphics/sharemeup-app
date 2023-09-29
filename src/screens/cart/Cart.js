@@ -7,11 +7,18 @@ import { changeCartElement } from '~/utils';
 
 import { StoreWithItem } from './components';
 
-export default function Cart() {
+export default function Cart({ navigation }) {
   const [checkedStoreId, setCheckedStoredId] = useState();
   const UsersCtx = useUsers();
 
   const CartCtx = useCart();
+
+  const users = UsersCtx.users;
+
+  const authId = 'user3';
+  const user = users.filter((user) => user.id === authId)[0];
+
+  const cartElements = user.cartElements;
 
   const handlePressSelect = (storeId) => {
     setCheckedStoredId(storeId);
@@ -26,15 +33,14 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
-    console.log('Checkout');
+    const selectCartElements = cartElements.filter(
+      (cartElement) => cartElement.item.storeId === checkedStoreId,
+    );
+    navigation.navigate('Checkout', {
+      storeId: checkedStoreId,
+      cartElements: selectCartElements,
+    });
   };
-
-  const users = UsersCtx.users;
-
-  const authId = 'user3';
-  const user = users.filter((user) => user.id === authId)[0];
-
-  const cartElements = user.cartElements;
 
   if (!cartElements.length) {
     return (

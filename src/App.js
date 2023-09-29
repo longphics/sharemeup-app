@@ -9,6 +9,7 @@ import {
   useUsers,
   useOrders,
   useCart,
+  useMe,
 } from './contexts';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
   const UsersCtx = useUsers();
   const OrdersCtx = useOrders();
   const CartCtx = useCart();
+  const MeCtx = useMe();
 
   useEffect(() => {
     CategoriesCtx.refresh();
@@ -26,6 +28,7 @@ export default function App() {
     UsersCtx.refresh();
     OrdersCtx.refresh();
     CartCtx.refresh();
+    MeCtx.refresh();
   }, []);
 
   return (

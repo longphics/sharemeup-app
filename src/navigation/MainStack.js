@@ -8,6 +8,7 @@ import {
   StoreDetails,
   OrderDetails,
   Cart,
+  Checkout,
   CreateItem,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
@@ -72,6 +73,13 @@ export default function MainStack() {
         component={Cart}
         options={{
           title: 'Cart',
+        }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={Checkout}
+        options={{
+          title: 'Checkout',
         }}
       />
       <Stack.Screen

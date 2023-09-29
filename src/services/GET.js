@@ -60,3 +60,12 @@ export async function fetchCart() {
   });
   return res;
 }
+
+export async function fetchMe() {
+  console.log('Fetch me');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/users/me',
+  });
+  return res;
+}

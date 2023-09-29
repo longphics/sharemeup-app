@@ -42,3 +42,21 @@ export async function createItem(data) {
 
   return res;
 }
+
+export async function createOrder(storeId, address, phone) {
+  console.log('Create order');
+
+  const data = {
+    storeId,
+    address,
+    phone,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/orders/create',
+    data,
+  });
+
+  return res;
+}
