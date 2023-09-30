@@ -1,17 +1,44 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import { useAuth } from '~/contexts';
+
 export default function Menu({ navigation }) {
+  const authCtx = useAuth();
+
+  const handlePressStore = () => {
+    navigation.navigate('StoreTab', {
+      screen: 'ManageStore',
+    });
+  };
+
+  const handlePressLogout = () => {
+    Alert.alert('Confirm', 'Do you want to logout', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          authCtx.logout();
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={styles.screenContainer}>
-      <Button
-        onPress={() => {
-          navigation.navigate('StoreTab', {
-            screen: 'ManageStore',
-          });
-        }}
-      >
+      <Button mode="contained-tonal" onPress={handlePressStore}>
         Manage Store
+      </Button>
+
+      <Button
+        mode="contained-tonal"
+        onPress={handlePressLogout}
+        style={{ marginTop: 12 }}
+      >
+        Log out
       </Button>
     </View>
   );
@@ -20,5 +47,7 @@ export default function Menu({ navigation }) {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
+    padding: 12,
+    justifyContent: 'center',
   },
 });

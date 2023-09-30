@@ -1,33 +1,34 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
-import { useMe } from '~/contexts';
+import { useAuth, useMe } from '~/contexts';
 import { createOrder } from '~/services';
 
 import { StoreWithItemCheckout, CheckoutForm } from './components';
 import { useIsFocused } from '@react-navigation/native';
 
-export default function Checkout({ route }) {
-  const MeCtx = useMe();
-
-  const isFocus = useIsFocused();
-
-  useEffect(() => {
-    // MeCtx.refresh();
-  }, [isFocus]);
+export default function Checkout({ navigation, route }) {
+  const meCtx = useMe();
+  const authCtx = useAuth();
 
   const storeId = route.params.storeId;
   const cartElements = route.params.cartElements;
 
-  const me = MeCtx.me;
+  const me = meCtx.me;
 
   const name = me.name;
   const [address, setAddress] = useState(me.address);
   const [phone, setPhone] = useState(me.phone);
 
   const handlePlaceOrder = () => {
-    createOrder(storeId, address, phone);
+    if (!storeId || !address || !phone) {
+      Alert.alert('Alert', 'Order data can not be empty');
+    } else {
+      createOrder(authCtx.token, storeId, address, phone);
+      Alert.alert('Information', 'You have place an order');
+      navigation.navigate('Home');
+    }
   };
 
   return (

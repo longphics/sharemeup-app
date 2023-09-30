@@ -11,18 +11,17 @@ import { ItemList } from '../items/components';
 import { StoreHeader } from './components';
 
 export default function ManageStore({ navigation }) {
-  const MeCtx = useMe();
-  const ItemsCtx = useItems();
+  const meCtx = useMe();
+  const itemsCtx = useItems();
 
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    // MeCtx.refresh();
-    ItemsCtx.refresh();
+    itemsCtx.refresh();
   }, [isFocus]);
 
-  const store = MeCtx.me.ownStore;
-  const phone = MeCtx.me.phone;
+  const store = meCtx.me.ownStore;
+  const phone = meCtx.me.phone;
 
   if (!store) {
     return (
@@ -32,7 +31,7 @@ export default function ManageStore({ navigation }) {
     );
   }
 
-  const items = ItemsCtx.items.filter((item) => item.storeId === store.id);
+  const items = itemsCtx.items.filter((item) => item.storeId === store.id);
 
   useEffect(() => {
     navigation.setOptions({

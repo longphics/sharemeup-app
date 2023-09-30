@@ -7,8 +7,8 @@ import Item from './Item';
 import Store from './Store';
 
 export default function StoreWithItemCheckout({ storeId, cartElements }) {
-  const StoresCtx = useStores();
-  const store = StoresCtx.stores.filter((store) => store.id === storeId)[0];
+  const storesCtx = useStores();
+  const store = storesCtx.stores.filter((store) => store.id === storeId)[0];
 
   return (
     <View style={styles.container}>

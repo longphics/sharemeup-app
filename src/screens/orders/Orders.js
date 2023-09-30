@@ -1,39 +1,67 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
 import { useMe, useOrders } from '~/contexts';
+import { changeOrderStatus } from '~/services';
 
 import { StoreWithItem } from './components';
 
 export default function OrdersOrders({ navigation }) {
-  const MeCtx = useMe();
-  const OrdersCtx = useOrders();
+  const meCtx = useMe();
+  const ordersCtx = useOrders();
 
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    // MeCtx.refresh();
-    OrdersCtx.refresh();
+    ordersCtx.refresh();
   }, [isFocus]);
 
   const [tab, setTab] = useState('Waiting');
 
-  const userId = MeCtx.me.id;
+  const userId = meCtx.me.id;
 
-  const orders = OrdersCtx.orders;
+  const orders = ordersCtx.orders;
 
   const myOrders = orders.filter((order) => order.userId === userId);
 
   const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 
-  const handlePressCancel = (oderId) => {
-    console.log('Cancel', oderId);
+  const handlePressCancel = (orderId) => {
+    // console.log('Cancel', orderId);
+
+    Alert.alert('Confirm', 'Do you want to cancel this order', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await changeOrderStatus(orderId, 'Canceled');
+          ordersCtx.refresh();
+        },
+      },
+    ]);
   };
 
-  const handlePressReceive = (oderId) => {
-    console.log('Receive', oderId);
+  const handlePressReceive = async (orderId) => {
+    // console.log('Receive', orderId);
+
+    Alert.alert('Confirm', 'Did you receive this order', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await changeOrderStatus(orderId, 'Received');
+          ordersCtx.refresh();
+        },
+      },
+    ]);
   };
 
   const handlePressFeedback = (orderId) => {

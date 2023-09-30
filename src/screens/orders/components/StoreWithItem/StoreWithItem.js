@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { Button, Divider, Text } from 'react-native-paper';
+import { Button, Divider } from 'react-native-paper';
 
 import { GlobalStyles } from '~/constants';
 import Item from './Item';

@@ -1,27 +1,23 @@
 import { useEffect } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useCart, useItems, useUsers } from '~/contexts';
-import { changeCartElement } from '~/utils';
+import { useAuth, useItems, useMe } from '~/contexts';
+import { updateCart } from '~/services';
 
 import { FeedbackList, ItemInfo, StoreInfo, SelectItem } from './components';
 
 export default function ItemDetails({ navigation, route }) {
-  const ItemsCtx = useItems();
-  const CartCtx = useCart();
-  const UsersCtx = useUsers();
+  const authCtx = useAuth();
+  const meCtx = useMe();
+  const itemsCtx = useItems();
+
+  const item = itemsCtx.items.filter((item) => item.id === route.params.id)[0];
+
+  const itemStoreId = item.storeId;
+  const myStoreId = meCtx.me.ownStore.id;
 
   const isFocus = useIsFocused();
-
-  useEffect(() => {
-    // ItemsCtx.refresh();
-    // CartCtx.refresh();
-    // UsersCtx.refresh();
-  }, [isFocus]);
-
-  const item = ItemsCtx.items.filter((item) => item.id === route.params.id)[0];
-
   useEffect(() => {
     navigation.setOptions({
       title: item.name,
@@ -29,8 +25,10 @@ export default function ItemDetails({ navigation, route }) {
     });
   }, [isFocus, navigation]);
 
-  const handlePressCart = (itemId, amount) => {
-    changeCartElement(itemId, amount, CartCtx, UsersCtx);
+  const handlePressCart = async (itemId, amount) => {
+    await updateCart(authCtx.token, itemId, amount);
+    meCtx.refresh(authCtx.token);
+    Alert.alert('Information', 'You have add to cart');
   };
 
   const handlePressPick = (itemId, amount) => {
@@ -68,11 +66,13 @@ export default function ItemDetails({ navigation, route }) {
         <StoreInfo {...storeInfoProps} />
         <FeedbackList {...feedbackListProps} />
       </ScrollView>
+
       <SelectItem
         itemId={item.id}
         stock={item.stock}
         onPressCart={handlePressCart}
         onPressPick={handlePressPick}
+        isCanBuy={itemStoreId !== myStoreId}
       />
     </View>
   );

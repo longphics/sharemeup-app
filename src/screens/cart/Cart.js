@@ -1,53 +1,53 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-
-import { useCart, useUsers } from '~/contexts';
-import { changeCartElement } from '~/utils';
-
-import { StoreWithItem } from './components';
 import { useIsFocused } from '@react-navigation/native';
 
+import { useAuth, useMe } from '~/contexts';
+import { updateCart } from '~/services';
+
+import { StoreWithItem } from './components';
+
 export default function Cart({ navigation }) {
-  const UsersCtx = useUsers();
-  const CartCtx = useCart();
+  const authCtx = useAuth();
+  const meCtx = useMe();
 
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    // UsersCtx.refresh();
-    CartCtx.refresh();
+    // usersCtx.refresh();
   }, [isFocus]);
 
-  const [checkedStoreId, setCheckedStoredId] = useState();
+  const [checkedStoreId, setCheckedStoredId] = useState('');
 
-  const users = UsersCtx.users;
-
-  const authId = 'user3';
-  const user = users.filter((user) => user.id === authId)[0];
-
-  const cartElements = user.cartElements;
+  const cartElements = meCtx.me.cartElements;
 
   const handlePressSelect = (storeId) => {
     setCheckedStoredId(storeId);
   };
 
   const handlePressAdd = async (itemId, amount) => {
-    changeCartElement(itemId, amount, CartCtx, UsersCtx);
+    await updateCart(authCtx.token, itemId, amount);
+    meCtx.refresh(authCtx.token);
   };
 
   const handlePressMinus = async (itemId, amount) => {
-    changeCartElement(itemId, amount, CartCtx, UsersCtx);
+    await updateCart(authCtx.token, itemId, amount);
+    meCtx.refresh(authCtx.token);
   };
 
   const handleCheckout = () => {
-    const selectCartElements = cartElements.filter(
-      (cartElement) => cartElement.item.storeId === checkedStoreId,
-    );
-    navigation.navigate('Checkout', {
-      storeId: checkedStoreId,
-      cartElements: selectCartElements,
-    });
+    if (!checkedStoreId) {
+      Alert.alert('Alert', 'You must select a store to checkout');
+    } else {
+      const selectCartElements = cartElements.filter(
+        (cartElement) => cartElement.item.storeId === checkedStoreId,
+      );
+      navigation.navigate('Checkout', {
+        storeId: checkedStoreId,
+        cartElements: selectCartElements,
+      });
+    }
   };
 
   if (!cartElements.length) {

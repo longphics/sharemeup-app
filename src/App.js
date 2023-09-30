@@ -8,28 +8,21 @@ import {
   useStores,
   useUsers,
   useOrders,
-  useCart,
-  useMe,
 } from './contexts';
 
 export default function App() {
-  const CategoriesCtx = useCategories();
-  const ItemsCtx = useItems();
-  const StoresCtx = useStores();
-  const UsersCtx = useUsers();
-  const OrdersCtx = useOrders();
-  const CartCtx = useCart();
-  const MeCtx = useMe();
+  const categoriesCtx = useCategories();
+  const itemsCtx = useItems();
+  const storesCtx = useStores();
+  const usersCtx = useUsers();
+  const ordersCtx = useOrders();
 
   useEffect(() => {
-    CategoriesCtx.refresh();
-    ItemsCtx.refresh();
-    StoresCtx.refresh();
-    UsersCtx.refresh();
-    OrdersCtx.refresh();
-    CartCtx.refresh();
-
-    MeCtx.refresh();
+    categoriesCtx.refresh();
+    itemsCtx.refresh();
+    storesCtx.refresh();
+    usersCtx.refresh();
+    ordersCtx.refresh();
   }, []);
 
   return (

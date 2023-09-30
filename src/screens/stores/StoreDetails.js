@@ -8,12 +8,12 @@ import { ItemList } from '../items/components';
 import { StoreHeader } from './components';
 
 export default function StoreDetails({ navigation, route }) {
-  const StoresCtx = useStores();
-  const stores = StoresCtx.stores;
+  const storesCtx = useStores();
+  const stores = storesCtx.stores;
   const store = stores.filter((store) => store.id === route.params.id)[0];
 
-  const ItemsCtx = useItems();
-  const items = ItemsCtx.items.filter((item) => item.storeId === store.id);
+  const itemsCtx = useItems();
+  const items = itemsCtx.items.filter((item) => item.storeId === store.id);
 
   const handlePressItem = (id) => {
     navigation.navigate('ItemDetails', {

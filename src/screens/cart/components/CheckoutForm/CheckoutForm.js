@@ -26,6 +26,7 @@ export default function CheckoutForm({
         value={phone}
         onChangeText={setPhone}
         style={{ marginTop: 12 }}
+        keyboardType="decimal-pad"
       />
     </View>
   );

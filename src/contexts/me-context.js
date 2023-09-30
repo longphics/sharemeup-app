@@ -4,7 +4,7 @@ import { fetchMe } from '~/services';
 
 export const MeContext = createContext({
   me: {},
-  refresh: () => {
+  refresh: (token) => {
     return new Promise();
   },
 });
@@ -12,9 +12,9 @@ export const MeContext = createContext({
 export default function MeProvider({ children }) {
   const [me, setMe] = useState({});
 
-  async function refresh() {
+  async function refresh(token) {
     try {
-      const res = await fetchMe();
+      const res = await fetchMe(token);
       if (res.status === 200) {
         setMe(res.data);
       } else {

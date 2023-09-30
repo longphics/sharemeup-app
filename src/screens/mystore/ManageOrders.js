@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
 import { useMe, useOrders } from '~/contexts';
+import { changeOrderStatus } from '~/services';
 
 import { UserWithItem } from './components';
 
 export default function ManageOrders({ navigation }) {
-  const MeCtx = useMe();
-  const OrdersCtx = useOrders();
+  const meCtx = useMe();
+  const ordersCtx = useOrders();
 
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    // MeCtx.refresh();
-    OrdersCtx.refresh();
+    ordersCtx.refresh();
   }, [isFocus]);
 
   const [tab, setTab] = useState('Waiting');
 
-  const store = MeCtx.me.ownStore;
+  const store = meCtx.me.ownStore;
 
   if (!store) {
     return (
@@ -32,7 +32,7 @@ export default function ManageOrders({ navigation }) {
 
   const myStoreId = store.id;
 
-  const myStoreOrders = OrdersCtx.orders.filter(
+  const myStoreOrders = ordersCtx.orders.filter(
     (order) => order.storeId === myStoreId,
   );
 
@@ -40,12 +40,40 @@ export default function ManageOrders({ navigation }) {
     (order) => order.status === tab,
   );
 
-  const handlePressCancel = (orderId) => {
-    console.log('Cancel', orderId);
+  const handlePressCancel = async (orderId) => {
+    // console.log('Cancel', orderId);
+
+    Alert.alert('Confirm', 'Do you want to cancel this order', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await changeOrderStatus(orderId, 'Canceled');
+          ordersCtx.refresh();
+        },
+      },
+    ]);
   };
 
-  const handlePressAccept = (orderId) => {
-    console.log('Accept', orderId);
+  const handlePressAccept = async (orderId) => {
+    // console.log('Accept', orderId);
+
+    Alert.alert('Confirm', 'Do you want to accept this order', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await changeOrderStatus(orderId, 'Taking');
+          ordersCtx.refresh();
+        },
+      },
+    ]);
   };
 
   const handlePressDetail = (orderId) => {

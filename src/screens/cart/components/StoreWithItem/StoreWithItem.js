@@ -13,8 +13,8 @@ export default function StoreWithItem({
   onPressMinus,
   checkedStoreId,
 }) {
-  const StoresCtx = useStores();
-  const store = StoresCtx.stores.filter((store) => store.id === storeId)[0];
+  const storesCtx = useStores();
+  const store = storesCtx.stores.filter((store) => store.id === storeId)[0];
 
   return (
     <View style={styles.container}>
