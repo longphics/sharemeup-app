@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { useIsFocused } from '@react-navigation/native';
 
 import { useAuth, useMe } from '~/contexts';
 import { updateCart } from '~/services';
@@ -9,18 +8,32 @@ import { updateCart } from '~/services';
 import { StoreWithItem } from './components';
 
 export default function Cart({ navigation }) {
+  const [checkedStoreId, setCheckedStoredId] = useState('');
+
   const authCtx = useAuth();
   const meCtx = useMe();
 
-  const isFocus = useIsFocused();
-
-  useEffect(() => {
-    // usersCtx.refresh();
-  }, [isFocus]);
-
-  const [checkedStoreId, setCheckedStoredId] = useState('');
-
   const cartElements = meCtx.me.cartElements;
+
+  if (!cartElements.length) {
+    return (
+      <View
+        style={[
+          styles.screenContainer,
+          { justifyContent: 'center', alignItems: 'center' },
+        ]}
+      >
+        <Text variant="bodyLarge">Cart is empty</Text>
+      </View>
+    );
+  }
+
+  const cartElements_groups = cartElements.reduce((x, y) => {
+    (x[y.item.storeId] = x[y.item.storeId] || []).push(y);
+    return x;
+  }, {});
+
+  const storeIds = Object.keys(cartElements_groups);
 
   const handlePressSelect = (storeId) => {
     setCheckedStoredId(storeId);
@@ -50,42 +63,20 @@ export default function Cart({ navigation }) {
     }
   };
 
-  if (!cartElements.length) {
-    return (
-      <View
-        style={[
-          styles.screenContainer,
-          { justifyContent: 'center', alignItems: 'center' },
-        ]}
-      >
-        <Text variant="bodyLarge">Cart is empty</Text>
-      </View>
-    );
-  }
-
-  const cartElements_groups = cartElements.reduce((x, y) => {
-    (x[y.item.store.id] = x[y.item.store.id] || []).push(y);
-    return x;
-  }, {});
-
-  const storeIds = Object.keys(cartElements_groups);
-
   return (
     <View style={styles.screenContainer}>
       <ScrollView>
-        {storeIds.map((storeId) => {
-          return (
-            <StoreWithItem
-              storeId={storeId}
-              cartElements={cartElements_groups[storeId]}
-              key={storeId}
-              onPressSelect={handlePressSelect}
-              onPressAdd={handlePressAdd}
-              onPressMinus={handlePressMinus}
-              checkedStoreId={checkedStoreId}
-            />
-          );
-        })}
+        {storeIds.map((storeId) => (
+          <StoreWithItem
+            storeId={storeId}
+            cartElements={cartElements_groups[storeId]}
+            key={storeId}
+            onPressSelect={handlePressSelect}
+            onPressAdd={handlePressAdd}
+            onPressMinus={handlePressMinus}
+            checkedStoreId={checkedStoreId}
+          />
+        ))}
       </ScrollView>
       <View style={styles.buttonContainer}>
         <Button mode="contained" onPress={handleCheckout}>

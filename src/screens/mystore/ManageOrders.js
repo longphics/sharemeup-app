@@ -20,17 +20,15 @@ export default function ManageOrders({ navigation }) {
 
   const [tab, setTab] = useState('Waiting');
 
-  const store = meCtx.me.ownStore;
+  const myStoreId = meCtx.me.ownStore?.id;
 
-  if (!store) {
+  if (!myStoreId) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>You do not have your own store</Text>
       </View>
     );
   }
-
-  const myStoreId = store.id;
 
   const myStoreOrders = ordersCtx.orders.filter(
     (order) => order.storeId === myStoreId,
@@ -41,8 +39,6 @@ export default function ManageOrders({ navigation }) {
   );
 
   const handlePressCancel = async (orderId) => {
-    // console.log('Cancel', orderId);
-
     Alert.alert('Confirm', 'Do you want to cancel this order', [
       {
         text: 'Cancel',
@@ -59,8 +55,6 @@ export default function ManageOrders({ navigation }) {
   };
 
   const handlePressAccept = async (orderId) => {
-    // console.log('Accept', orderId);
-
     Alert.alert('Confirm', 'Do you want to accept this order', [
       {
         text: 'Cancel',

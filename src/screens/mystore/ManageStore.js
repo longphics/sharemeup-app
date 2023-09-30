@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Divider, Button, Text } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useStores, useItems, useMe } from '~/contexts';
+import { useStores, useItems, useMe, useUsers } from '~/contexts';
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
@@ -12,6 +12,8 @@ import { StoreHeader } from './components';
 
 export default function ManageStore({ navigation }) {
   const meCtx = useMe();
+  const usersCtx = useUsers();
+  const storesCtx = useStores();
   const itemsCtx = useItems();
 
   const isFocus = useIsFocused();
@@ -20,10 +22,14 @@ export default function ManageStore({ navigation }) {
     itemsCtx.refresh();
   }, [isFocus]);
 
-  const store = meCtx.me.ownStore;
-  const phone = meCtx.me.phone;
+  const myId = meCtx.me.id;
 
-  if (!store) {
+  const myUser = usersCtx.users.filter((user) => user.id === myId)[0];
+  const phone = myUser.phone;
+
+  const myStore = storesCtx.stores.filter((store) => store.ownerId === myId)[0];
+
+  if (!myStore) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>You do not have your own store</Text>
@@ -31,11 +37,11 @@ export default function ManageStore({ navigation }) {
     );
   }
 
-  const items = itemsCtx.items.filter((item) => item.storeId === store.id);
+  const items = itemsCtx.items.filter((item) => item.storeId === myStore.id);
 
   useEffect(() => {
     navigation.setOptions({
-      title: store.name,
+      title: myStore.name,
     });
   });
 
@@ -60,7 +66,7 @@ export default function ManageStore({ navigation }) {
     <View style={styles.screenContainer}>
       <ScrollView>
         <StoreHeader
-          store={store}
+          store={myStore}
           phone={phone}
           onPressEdit={handlePressEdit}
           onPressDonation={handlePressDonation}

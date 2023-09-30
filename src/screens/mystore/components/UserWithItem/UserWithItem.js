@@ -4,6 +4,7 @@ import { Button, Divider } from 'react-native-paper';
 import { GlobalStyles } from '~/constants';
 import Item from './Item';
 import User from './User';
+import { useItems, useUsers } from '~/contexts';
 
 export default function UserWithItem({
   order,
@@ -11,6 +12,10 @@ export default function UserWithItem({
   onPressAccept,
   onPressDetail,
 }) {
+  const itemsCtx = useItems();
+  const usersCtx = useUsers();
+  const user = usersCtx.users.filter((user) => user.id === order.userId)[0];
+
   const handlePressCancel = () => {
     onPressCancel(order.id);
   };
@@ -55,12 +60,14 @@ export default function UserWithItem({
         <User
           status={order.status}
           id={order.userId}
-          name={order.user.name}
+          name={user.name}
           onPressDetail={onPressDetail}
         />
 
         {order.orderElements.map((orderElement) => {
-          const item = orderElement.item;
+          const item = itemsCtx.items.filter(
+            (item) => item.id === orderElement.itemId,
+          )[0];
           return (
             <Item
               name={item.name}

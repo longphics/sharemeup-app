@@ -2,10 +2,18 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Button, Divider } from 'react-native-paper';
 
 import { GlobalStyles } from '~/constants';
+import { useItems, useStores } from '~/contexts';
+
 import Item from './Item';
 import Store from './Store';
 
 export default function StoreWithItem({ order, onPressButton, onPressDetail }) {
+  const itemsCtx = useItems();
+  const storesCtx = useStores();
+  const store = storesCtx.stores.filter(
+    (store) => store.id === order.storeId,
+  )[0];
+
   const handlePressDetail = () => {
     onPressDetail(order.id);
   };
@@ -61,12 +69,14 @@ export default function StoreWithItem({ order, onPressButton, onPressDetail }) {
         <Store
           status={order.status}
           id={order.storeId}
-          name={order.store.name}
+          name={store.name}
           onPressDetail={onPressDetail}
         />
 
         {order.orderElements.map((orderElement) => {
-          const item = orderElement.item;
+          const item = itemsCtx.items.filter(
+            (item) => item.id === orderElement.itemId,
+          )[0];
           return (
             <Item
               name={item.name}

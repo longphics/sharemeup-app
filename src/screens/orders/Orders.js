@@ -8,7 +8,7 @@ import { changeOrderStatus } from '~/services';
 
 import { StoreWithItem } from './components';
 
-export default function OrdersOrders({ navigation }) {
+export default function Orders({ navigation }) {
   const meCtx = useMe();
   const ordersCtx = useOrders();
 
@@ -20,11 +20,11 @@ export default function OrdersOrders({ navigation }) {
 
   const [tab, setTab] = useState('Waiting');
 
-  const userId = meCtx.me.id;
+  const myId = meCtx.me.id;
 
   const orders = ordersCtx.orders;
 
-  const myOrders = orders.filter((order) => order.userId === userId);
+  const myOrders = orders.filter((order) => order.userId === myId);
 
   const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 

@@ -2,24 +2,25 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
-import { useAuth, useMe } from '~/contexts';
+import { useAuth, useMe, useUsers } from '~/contexts';
 import { createOrder } from '~/services';
 
 import { StoreWithItemCheckout, CheckoutForm } from './components';
-import { useIsFocused } from '@react-navigation/native';
 
 export default function Checkout({ navigation, route }) {
-  const meCtx = useMe();
   const authCtx = useAuth();
+  const meCtx = useMe();
+  const usersCtx = useUsers();
 
   const storeId = route.params.storeId;
   const cartElements = route.params.cartElements;
 
-  const me = meCtx.me;
+  // const me = meCtx.me;
+  const myUser = usersCtx.users.filter((user) => user.id === meCtx.me.id)[0];
 
-  const name = me.name;
-  const [address, setAddress] = useState(me.address);
-  const [phone, setPhone] = useState(me.phone);
+  const name = myUser.name;
+  const [address, setAddress] = useState(myUser.address);
+  const [phone, setPhone] = useState(myUser.phone);
 
   const handlePlaceOrder = () => {
     if (!storeId || !address || !phone) {

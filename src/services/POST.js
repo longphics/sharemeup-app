@@ -18,7 +18,7 @@ export async function updateCart(token, itemId, amount) {
   return res;
 }
 
-export async function createItem(data) {
+export async function createItem(token, data) {
   console.log('Create item');
 
   const form = new FormData();
@@ -40,6 +40,7 @@ export async function createItem(data) {
     url: backendConfig.url + '/items/create',
     data: form,
     headers: {
+      'Authorization': 'Bearer ' + token,
       'content-type': 'multipart/form-data',
     },
   });

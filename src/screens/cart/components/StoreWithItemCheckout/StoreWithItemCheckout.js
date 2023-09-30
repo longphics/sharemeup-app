@@ -1,13 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 
 import { GlobalStyles } from '~/constants';
-import { useStores } from '~/contexts';
+import { useItems, useStores } from '~/contexts';
 
 import Item from './Item';
 import Store from './Store';
 
 export default function StoreWithItemCheckout({ storeId, cartElements }) {
   const storesCtx = useStores();
+  const itemsCtx = useItems();
   const store = storesCtx.stores.filter((store) => store.id === storeId)[0];
 
   return (
@@ -15,7 +16,9 @@ export default function StoreWithItemCheckout({ storeId, cartElements }) {
       <Store name={store.name} />
 
       {cartElements.map((cartElement) => {
-        const item = cartElement.item;
+        const item = itemsCtx.items.filter(
+          (item) => item.id === cartElement.item.id,
+        )[0];
         return (
           <Item
             name={item.name}

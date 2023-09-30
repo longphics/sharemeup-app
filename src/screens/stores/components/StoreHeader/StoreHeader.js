@@ -3,8 +3,14 @@ import { Avatar, Text, Button } from 'react-native-paper';
 
 import { Icon, VerticalLine } from '~/components';
 import { GlobalStyles } from '~/constants';
+import { useUsers } from '~/contexts';
 
 export default function StoreHeader({ store }) {
+  const usersCtx = useUsers();
+  const ownerUser = usersCtx.users.filter(
+    (user) => user.id === store.ownerId,
+  )[0];
+
   const handlePressFollow = () => {
     console.log('Follow');
   };
@@ -65,10 +71,8 @@ export default function StoreHeader({ store }) {
           </Text>
         </View>
         <View style={styles.part2_col2}>
-          <Text style={styles.text}>{store.owner.address}</Text>
-          <Text style={[styles.text, { marginTop: 4 }]}>
-            {store.owner.phone}
-          </Text>
+          <Text style={styles.text}>{store.address}</Text>
+          <Text style={[styles.text, { marginTop: 4 }]}>{ownerUser.phone}</Text>
         </View>
         <View style={styles.part2_col3}>
           <Button

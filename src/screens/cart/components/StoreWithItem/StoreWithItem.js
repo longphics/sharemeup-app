@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { GlobalStyles } from '~/constants';
 
+import { GlobalStyles } from '~/constants';
 import { useStores } from '~/contexts';
+
 import Item from './Item';
 import Store from './Store';
 

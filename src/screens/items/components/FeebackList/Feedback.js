@@ -3,20 +3,26 @@ import { Text, Avatar } from 'react-native-paper';
 
 import { Stars } from '~/components';
 import { GlobalStyles } from '~/constants';
+import { useUsers } from '~/contexts';
 import { dateToString } from '~/utils';
 
 export default function Feedback({ feedback }) {
+  const usersCtx = useUsers();
+  const feedbackUser = usersCtx.users.filter(
+    (user) => user.id === feedback.userId,
+  )[0];
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Avatar.Image
           size={50}
-          source={{ uri: feedback.user.avatar }}
+          source={{ uri: feedbackUser.avatar }}
           style={styles.avatar}
         />
         <View style={styles.nameContainer}>
           <Text variant="bodyLarge" style={styles.text}>
-            {feedback.user.name}
+            {feedbackUser.name}
           </Text>
           <Stars star={feedback.star} size={16} />
         </View>
