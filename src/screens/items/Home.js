@@ -27,7 +27,6 @@ export default function Home({ navigation }) {
   }, [isFocus]);
 
   const handlePressCategory = (category) => {
-    console.log(category);
     setCategory(category);
   };
 

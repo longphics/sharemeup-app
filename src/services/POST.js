@@ -100,3 +100,45 @@ export async function changeOrderStatus(orderId, status) {
 
   return res;
 }
+
+export async function editProfie(token, name, phone, address) {
+  console.log('Edit profie');
+
+  const data = {
+    name,
+    phone,
+    address,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/users/edit',
+    data,
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+
+  return res;
+}
+
+export async function editStore(token, name, phone, address) {
+  console.log('Edit store');
+
+  const data = {
+    name,
+    phone,
+    address,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/stores/edit',
+    data,
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+
+  return res;
+}

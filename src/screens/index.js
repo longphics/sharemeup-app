@@ -24,6 +24,7 @@ export { default as CreateStore } from './mystore/CreateStore';
 export { default as CreateItem } from './mystore/CreateItem';
 export { default as Donations } from './mystore/Donations';
 export { default as ManageOrderDetails } from './mystore/ManageOrderDetails';
+export { default as EditStore } from './mystore/EditStore';
 
 export { default as Community } from './posts/Community';
 export { default as PostDetails } from './posts/PostDetails';
@@ -34,6 +35,7 @@ export { default as SearchPosts } from './posts/SearchPosts';
 export { default as Menu } from './profile/Menu';
 export { default as Profile } from './profile/Profile';
 export { default as GoodActions } from './profile/GoodActions';
+export { default as EditProfile } from './profile/EditProfile';
 
 export { default as ProfileDetails } from './people/ProfileDetails';
 export { default as SearchPeople } from './people/SearchPeople';

@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Divider, Button, Text } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useStores, useItems, useMe, useUsers } from '~/contexts';
+import { useStores, useItems, useMe } from '~/contexts';
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
@@ -12,7 +12,6 @@ import { StoreHeader } from './components';
 
 export default function ManageStore({ navigation }) {
   const meCtx = useMe();
-  const usersCtx = useUsers();
   const storesCtx = useStores();
   const itemsCtx = useItems();
 
@@ -25,9 +24,6 @@ export default function ManageStore({ navigation }) {
   }, [isFocus]);
 
   const myId = meCtx.me.id;
-
-  const myUser = usersCtx.users.filter((user) => user.id === myId)[0];
-  const phone = myUser.phone;
 
   const myStore = storesCtx.stores.filter((store) => store.ownerId === myId)[0];
 
@@ -52,7 +48,7 @@ export default function ManageStore({ navigation }) {
   };
 
   const handlePressEdit = () => {
-    console.log('Edit');
+    navigation.navigate('EditStore');
   };
 
   const handlePressDonation = () => {
@@ -68,7 +64,6 @@ export default function ManageStore({ navigation }) {
       <ScrollView>
         <StoreHeader
           store={myStore}
-          phone={phone}
           onPressEdit={handlePressEdit}
           onPressDonation={handlePressDonation}
         />

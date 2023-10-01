@@ -12,6 +12,10 @@ export default function Menu({ navigation }) {
     });
   };
 
+  const handlePressEditProfile = () => {
+    navigation.navigate('EditProfile');
+  };
+
   const handlePressLogout = () => {
     Alert.alert('Confirm', 'Do you want to logout', [
       {
@@ -31,6 +35,14 @@ export default function Menu({ navigation }) {
     <View style={styles.screenContainer}>
       <Button mode="contained-tonal" onPress={handlePressStore}>
         Manage Store
+      </Button>
+
+      <Button
+        mode="contained-tonal"
+        onPress={handlePressEditProfile}
+        style={{ marginTop: 12 }}
+      >
+        Edit Profile
       </Button>
 
       <Button
