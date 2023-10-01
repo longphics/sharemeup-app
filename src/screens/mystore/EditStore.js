@@ -21,6 +21,8 @@ export default function EditStore({ navigation }) {
   const [address, setAddress] = useState(myStore.address);
 
   const handlePressSave = async () => {
+    Keyboard.dismiss();
+
     if (!name || !phone || !address) {
       Alert.alert('Alert', 'Data can not be empty');
       return;
@@ -32,12 +34,7 @@ export default function EditStore({ navigation }) {
       Alert.alert('Information', 'Update your store successfully', [
         {
           text: 'OK',
-          onPress: () => {
-            Keyboard.dismiss();
-            setTimeout(() => {
-              navigation.goBack();
-            }, 500);
-          },
+          onPress: navigation.goBack,
         },
       ]);
     } catch (err) {

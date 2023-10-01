@@ -19,6 +19,8 @@ export default function EditProfile({ navigation }) {
   const [address, setAddress] = useState(myUser.address);
 
   const handlePressSave = async () => {
+    Keyboard.dismiss();
+
     if (!name || !phone || !address) {
       Alert.alert('Alert', 'Data can not be empty');
       return;
@@ -30,12 +32,7 @@ export default function EditProfile({ navigation }) {
       Alert.alert('Information', 'Update your profile successfully', [
         {
           text: 'OK',
-          onPress: () => {
-            Keyboard.dismiss();
-            setTimeout(() => {
-              navigation.goBack();
-            }, 500);
-          },
+          onPress: navigation.goBack,
         },
       ]);
     } catch (err) {
