@@ -7,6 +7,10 @@ import { GlobalStyles } from '~/constants';
 import CategoryList from './CategoryList';
 
 export default function FilterBar({ categories, onPressCategory }) {
+  const handlePressFilter = () => {
+    console.log('Press Filter');
+  };
+
   return (
     <View style={styles.container}>
       <CategoryList categories={categories} onPressCategory={onPressCategory} />
@@ -14,7 +18,7 @@ export default function FilterBar({ categories, onPressCategory }) {
         icon={({ color, size }) => (
           <Icon name="filter" color={color} size={size} />
         )}
-        onPress={() => {}}
+        onPress={handlePressFilter}
         iconColor={GlobalStyles.colors.onSurface}
         size={20}
       />

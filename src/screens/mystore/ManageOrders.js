@@ -15,7 +15,9 @@ export default function ManageOrders({ navigation }) {
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    ordersCtx.refresh();
+    if (isFocus) {
+      ordersCtx.refresh();
+    }
   }, [isFocus]);
 
   const [tab, setTab] = useState('Waiting');

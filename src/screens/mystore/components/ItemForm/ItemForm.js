@@ -28,7 +28,7 @@ export default function ItemForm({ onCreateItem }) {
   const handleSelectCategory = (categoryId) => {
     const filters = categories
       .filter((category) => category.id === categoryId)[0]
-      .filters.map((filter) => ({ ...filter, selected: 'Phi' }));
+      .filters.map((filter) => ({ ...filter, selected: '' }));
 
     setFilters(filters);
     setCategoryId(categoryId);

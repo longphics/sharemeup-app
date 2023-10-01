@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import Navigation from './navigation/Navigation';
@@ -11,6 +11,8 @@ import {
 } from './contexts';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const categoriesCtx = useCategories();
   const itemsCtx = useItems();
   const storesCtx = useStores();
@@ -18,12 +20,23 @@ export default function App() {
   const ordersCtx = useOrders();
 
   useEffect(() => {
-    categoriesCtx.refresh();
-    itemsCtx.refresh();
-    storesCtx.refresh();
-    usersCtx.refresh();
-    ordersCtx.refresh();
+    const fetchData = async () => {
+      Promise.all([
+        categoriesCtx.refresh(),
+        itemsCtx.refresh(),
+        storesCtx.refresh(),
+        usersCtx.refresh(),
+        ordersCtx.refresh(),
+      ]).then(() => {
+        setIsLoading(false);
+      });
+    };
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return;
+  }
 
   return (
     <>

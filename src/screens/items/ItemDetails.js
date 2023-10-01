@@ -23,11 +23,14 @@ export default function ItemDetails({ navigation, route }) {
   )[0];
 
   const isFocus = useIsFocused();
+
   useEffect(() => {
-    navigation.setOptions({
-      title: item.name,
-      hasCart: true,
-    });
+    if (isFocus) {
+      navigation.setOptions({
+        title: item.name,
+        hasCart: true,
+      });
+    }
   }, [isFocus, navigation]);
 
   const handlePressCart = async (itemId, amount) => {

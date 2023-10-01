@@ -19,7 +19,9 @@ export default function ManageStore({ navigation }) {
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    itemsCtx.refresh();
+    if (isFocus) {
+      itemsCtx.refresh();
+    }
   }, [isFocus]);
 
   const myId = meCtx.me.id;
@@ -58,7 +60,6 @@ export default function ManageStore({ navigation }) {
   };
 
   const handlePressAddNewItem = () => {
-    console.log('Add new item');
     navigation.navigate('CreateItem');
   };
 

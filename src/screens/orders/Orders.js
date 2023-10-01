@@ -15,7 +15,9 @@ export default function Orders({ navigation }) {
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    ordersCtx.refresh();
+    if (isFocus) {
+      ordersCtx.refresh();
+    }
   }, [isFocus]);
 
   const [tab, setTab] = useState('Waiting');
@@ -29,8 +31,6 @@ export default function Orders({ navigation }) {
   const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 
   const handlePressCancel = (orderId) => {
-    // console.log('Cancel', orderId);
-
     Alert.alert('Confirm', 'Do you want to cancel this order', [
       {
         text: 'Cancel',
@@ -47,8 +47,6 @@ export default function Orders({ navigation }) {
   };
 
   const handlePressReceive = async (orderId) => {
-    // console.log('Receive', orderId);
-
     Alert.alert('Confirm', 'Did you receive this order', [
       {
         text: 'Cancel',

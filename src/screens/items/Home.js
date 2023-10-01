@@ -2,26 +2,29 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useCategories, useItems } from '~/contexts';
+import { useCategories, useItems, useMe } from '~/contexts';
 
 import { FilterBar, ItemList } from './components';
 
 export default function Home({ navigation }) {
+  const [category, setCategory] = useState('Food');
+
   const categoriesCtx = useCategories();
   const itemsCtx = useItems();
-
-  const isFocus = useIsFocused();
-
-  useEffect(() => {
-    itemsCtx.refresh();
-  }, [isFocus]);
-
-  const [category, setCategory] = useState('Food');
+  const meCtx = useMe();
 
   const categories = categoriesCtx.categories.map((category) => category.name);
 
+  const isFocus = useIsFocused();
+
   let items = itemsCtx.items;
   items = items.filter((item) => item.category.name === category);
+
+  useEffect(() => {
+    if (isFocus) {
+      itemsCtx.refresh();
+    }
+  }, [isFocus]);
 
   const handlePressCategory = (category) => {
     console.log(category);

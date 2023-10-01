@@ -13,15 +13,12 @@ export default function MeProvider({ children }) {
   const [me, setMe] = useState({});
 
   async function refresh(token) {
-    try {
-      const res = await fetchMe(token);
-      if (res.status === 200) {
-        setMe(res.data);
-      } else {
-        console.log(res.status);
-      }
-    } catch (err) {
-      console.log(err);
+    const res = await fetchMe(token);
+
+    if (res.status === 200) {
+      setMe(res.data);
+    } else {
+      console.log(res.status);
     }
   }
 
