@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Keyboard } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { useAuth, useMe, useUsers } from '~/contexts';
@@ -7,7 +7,7 @@ import { editProfie } from '~/services';
 
 import { EditProfileForm } from './component';
 
-export default function EditProfile() {
+export default function EditProfile({ navigation }) {
   const meCtx = useMe();
   const usersCtx = useUsers();
   const authCtx = useAuth();
@@ -26,7 +26,18 @@ export default function EditProfile() {
 
     try {
       await editProfie(authCtx.token, name, phone, address);
-      Alert.alert('Information', 'Update your profile successfully');
+      await usersCtx.refresh();
+      Alert.alert('Information', 'Update your profile successfully', [
+        {
+          text: 'OK',
+          onPress: () => {
+            Keyboard.dismiss();
+            setTimeout(() => {
+              navigation.goBack();
+            }, 500);
+          },
+        },
+      ]);
     } catch (err) {
       Alert.alert('Error', 'Some error occur when saving');
     }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Keyboard } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { useAuth, useMe, useStores } from '~/contexts';
@@ -29,8 +29,17 @@ export default function EditStore({ navigation }) {
     try {
       await editStore(authCtx.token, name, phone, address);
       await storesCtx.refresh();
-      Alert.alert('Information', 'Update your store successfully');
-      navigation.goBack();
+      Alert.alert('Information', 'Update your store successfully', [
+        {
+          text: 'OK',
+          onPress: () => {
+            Keyboard.dismiss();
+            setTimeout(() => {
+              navigation.goBack();
+            }, 500);
+          },
+        },
+      ]);
     } catch (err) {
       console.log(err);
       Alert.alert('Error', 'Some error occur when saving');

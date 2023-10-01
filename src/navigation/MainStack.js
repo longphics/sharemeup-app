@@ -14,6 +14,7 @@ import {
   ManageOrderDetails,
   EditProfile,
   EditStore,
+  Register,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -47,6 +48,13 @@ export default function MainStack() {
             component={Login}
             options={{
               title: 'Login',
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              title: 'Register',
             }}
           />
         </>

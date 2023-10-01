@@ -142,3 +142,23 @@ export async function editStore(token, name, phone, address) {
 
   return res;
 }
+
+export async function register(email, name, phone, address, password) {
+  console.log('Register');
+
+  const data = {
+    email,
+    name,
+    phone,
+    address,
+    password,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/auth/signup',
+    data,
+  });
+
+  return res;
+}
