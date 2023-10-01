@@ -11,6 +11,7 @@ import {
   Checkout,
   CreateItem,
   Login,
+  ManageOrderDetails,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -103,6 +104,13 @@ export default function MainStack() {
             component={CreateItem}
             options={{
               title: 'New Item',
+            }}
+          />
+          <Stack.Screen
+            name="ManageOrderDetails"
+            component={ManageOrderDetails}
+            options={{
+              title: 'Manage Order Details',
             }}
           />
         </>

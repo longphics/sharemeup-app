@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView, Alert } from 'react-native';
-import { SegmentedButtons } from 'react-native-paper';
+import { SegmentedButtons, Text } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
 import { useMe, useOrders } from '~/contexts';
@@ -27,6 +27,19 @@ export default function Orders({ navigation }) {
   const orders = ordersCtx.orders;
 
   const myOrders = orders.filter((order) => order.userId === myId);
+
+  if (!myOrders.length) {
+    return (
+      <View
+        style={[
+          styles.screenContainer,
+          { justifyContent: 'center', alignItems: 'center' },
+        ]}
+      >
+        <Text variant="bodyLarge">Order is empty</Text>
+      </View>
+    );
+  }
 
   const myDisplayOrders = myOrders.filter((order) => order.status === tab);
 

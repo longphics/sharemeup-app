@@ -1,32 +1,26 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { useOrders, useStores, useUsers } from '~/contexts';
+import { useOrders, useUsers } from '~/contexts';
 
-import { OrderDetailForm, OrderItems } from './components';
+import { OrderDetailForm, OrderItems } from '../orders/components';
 
-export default function OrderDetails({ route }) {
+export default function ManageOrderDetails({ route }) {
   const orderCtx = useOrders();
-  const storesCtx = useStores();
   const usersCtx = useUsers();
 
   const myOrder = orderCtx.orders.filter(
     (order) => order.id === route.params.id,
   )[0];
 
-  const store = storesCtx.stores.filter(
-    (store) => store.id === myOrder.storeId,
-  )[0];
-  const storePhone = usersCtx.users.filter(
-    (user) => user.id === store.ownerId,
-  )[0].phone;
+  const user = usersCtx.users.filter((user) => user.id === myOrder.userId)[0];
 
   const orderDetailFormProps = {
-    name: store.name,
-    phone: storePhone,
-    address: store.address,
+    name: user.name,
+    phone: user.phone,
+    address: user.address,
     createdDate: myOrder.createAt,
     status: myOrder.status,
-    aboutText: 'Store',
+    aboutText: 'Receiver',
   };
 
   return (

@@ -19,14 +19,14 @@ export default function Checkout({ navigation, route }) {
   const myUser = usersCtx.users.filter((user) => user.id === meCtx.me.id)[0];
 
   const name = myUser.name;
-  const [address, setAddress] = useState(myUser.address);
-  const [phone, setPhone] = useState(myUser.phone);
+  const myAddress = myUser.address;
+  const myPhone = myUser.phone;
 
   const handlePlaceOrder = () => {
-    if (!storeId || !address || !phone) {
+    if (!storeId || !myAddress || !myPhone) {
       Alert.alert('Alert', 'Order data can not be empty');
     } else {
-      createOrder(authCtx.token, storeId, address, phone);
+      createOrder(authCtx.token, storeId);
       Alert.alert('Information', 'You have place an order');
       navigation.navigate('Home');
     }
@@ -35,7 +35,7 @@ export default function Checkout({ navigation, route }) {
   return (
     <View style={styles.screenContainer}>
       <ScrollView>
-        <CheckoutForm {...{ name, address, phone, setAddress, setPhone }} />
+        <CheckoutForm {...{ name, myAddress, myPhone }} />
         <StoreWithItemCheckout storeId={storeId} cartElements={cartElements} />
       </ScrollView>
 

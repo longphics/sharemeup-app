@@ -3,7 +3,7 @@ import { Text } from 'react-native-paper';
 
 import { GlobalStyles } from '~/constants';
 import { Icon, Stars, VerticalLine } from '~/components';
-import { dateToString } from '~/utils';
+import { formatDate } from '~/utils';
 
 export default function ItemInfo({
   name,
@@ -64,12 +64,12 @@ export default function ItemInfo({
               style={{ marginRight: 6 }}
             />
             <Text variant="bodyMedium" style={styles.text}>
-              Expired: {dateToString(expired)}
+              Expired: {formatDate(expired)}
             </Text>
           </View>
           <View style={styles.line4Right}>
             <Text variant="bodyMedium" style={[styles.text, { opacity: 0.5 }]}>
-              Created: {dateToString(createAt)}
+              Created: {formatDate(createAt)}
             </Text>
           </View>
         </View>

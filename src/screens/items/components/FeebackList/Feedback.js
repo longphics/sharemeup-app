@@ -4,7 +4,7 @@ import { Text, Avatar } from 'react-native-paper';
 import { Stars } from '~/components';
 import { GlobalStyles } from '~/constants';
 import { useUsers } from '~/contexts';
-import { dateToString } from '~/utils';
+import { formatDate } from '~/utils';
 
 export default function Feedback({ feedback }) {
   const usersCtx = useUsers();
@@ -28,7 +28,7 @@ export default function Feedback({ feedback }) {
         </View>
         <View style={styles.dateContainer}>
           <Text variant="labelSmall" style={[styles.text, { opacity: 0.5 }]}>
-            {dateToString(feedback.createAt)}
+            {formatDate(feedback.createAt)}
           </Text>
         </View>
       </View>

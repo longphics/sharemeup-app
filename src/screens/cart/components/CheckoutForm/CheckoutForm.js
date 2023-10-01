@@ -1,13 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
-export default function CheckoutForm({
-  name,
-  address,
-  phone,
-  setAddress,
-  setPhone,
-}) {
+export default function CheckoutForm({ name, myAddress, myPhone }) {
   return (
     <View style={styles.container}>
       <TextInput mode="outlined" label="Name" value={name} editable={false} />
@@ -15,18 +9,18 @@ export default function CheckoutForm({
       <TextInput
         mode="outlined"
         label="Address"
-        value={address}
-        onChangeText={setAddress}
+        value={myAddress}
         style={{ marginTop: 12 }}
+        editable={false}
       />
 
       <TextInput
         mode="outlined"
         label="Phone"
-        value={phone}
-        onChangeText={setPhone}
+        value={myPhone}
         style={{ marginTop: 12 }}
         keyboardType="decimal-pad"
+        editable={false}
       />
     </View>
   );

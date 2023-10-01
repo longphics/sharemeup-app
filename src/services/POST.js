@@ -48,13 +48,11 @@ export async function createItem(token, data) {
   return res;
 }
 
-export async function createOrder(token, storeId, address, phone) {
+export async function createOrder(token, storeId) {
   console.log('Create order');
 
   const data = {
     storeId,
-    address,
-    phone,
   };
 
   const res = await axios({

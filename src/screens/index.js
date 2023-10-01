@@ -23,6 +23,7 @@ export { default as ManageOrders } from './mystore/ManageOrders';
 export { default as CreateStore } from './mystore/CreateStore';
 export { default as CreateItem } from './mystore/CreateItem';
 export { default as Donations } from './mystore/Donations';
+export { default as ManageOrderDetails } from './mystore/ManageOrderDetails';
 
 export { default as Community } from './posts/Community';
 export { default as PostDetails } from './posts/PostDetails';
