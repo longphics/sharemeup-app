@@ -58,3 +58,12 @@ export async function fetchMe(token) {
   });
   return res;
 }
+
+export async function fetchPosts() {
+  console.log('Fetch posts');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/posts',
+  });
+  return res;
+}

@@ -34,6 +34,12 @@ import Minus from '~/assets/icons/minus.svg';
 import Store from '~/assets/icons/store.svg';
 import StoreFill from '~/assets/icons/store-fill.svg';
 import Add from '~/assets/icons/add.svg';
+import Heart from '~/assets/icons/heart.svg';
+import HeartFill from '~/assets/icons/heart-fill.svg';
+import Dislike from '~/assets/icons/dislike.svg';
+import DislikeFill from '~/assets/icons/dislike-fill.svg';
+import Comment from '~/assets/icons/comment.svg';
+import CommentFill from '~/assets/icons/comment-fill.svg';
 
 export default function Icon({ name, color, size, style }) {
   const containerStyle = {
@@ -79,6 +85,12 @@ export default function Icon({ name, color, size, style }) {
     'store': Store,
     'store-fill': StoreFill,
     'add': Add,
+    'heart': Heart,
+    'heart-fill': HeartFill,
+    'dislike': Dislike,
+    'dislike-fill': DislikeFill,
+    'comment': Comment,
+    'comment-fill': CommentFill,
   };
 
   const Component = Icons[name];

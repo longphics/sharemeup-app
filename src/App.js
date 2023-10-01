@@ -8,6 +8,7 @@ import {
   useStores,
   useUsers,
   useOrders,
+  usePosts,
 } from './contexts';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
   const storesCtx = useStores();
   const usersCtx = useUsers();
   const ordersCtx = useOrders();
+  const postsCtx = usePosts();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +29,7 @@ export default function App() {
         storesCtx.refresh(),
         usersCtx.refresh(),
         ordersCtx.refresh(),
+        postsCtx.refresh(),
       ]).then(() => {
         setIsLoading(false);
       });

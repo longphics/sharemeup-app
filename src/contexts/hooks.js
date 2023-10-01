@@ -7,6 +7,7 @@ import { UsersContext } from './users-context';
 import { OrdersContext } from './orders-context';
 import { MeContext } from './me-context';
 import { AuthContext } from './auth-context';
+import { PostsContext } from './posts-context';
 
 export function useCategories() {
   return useContext(CategoriesContext);
@@ -34,4 +35,8 @@ export function useMe() {
 
 export function useAuth() {
   return useContext(AuthContext);
+}
+
+export function usePosts() {
+  return useContext(PostsContext);
 }
