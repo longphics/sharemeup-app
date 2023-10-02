@@ -91,6 +91,10 @@ export default function ManageOrders({ navigation }) {
     });
   };
 
+  const handlePressWho = (id) => {
+    console.log(id);
+  };
+
   return (
     <View style={styles.screenContainer}>
       <SegmentedButtons
@@ -114,6 +118,7 @@ export default function ManageOrders({ navigation }) {
               onPressCancel={handlePressCancel}
               onPressAccept={handlePressAccept}
               onPressDetail={handlePressDetail}
+              onPressWho={handlePressWho}
             />
           );
         })}

@@ -5,33 +5,28 @@ import { GlobalStyles } from '~/constants';
 import { useUsers } from '~/contexts';
 
 import Item from './Item';
-import Giver from './Giver';
+import Receiver from './Receiver';
 
-export default function GiverWithItem({
+export default function ReceiverWithItem({
   gift,
   onPressCancel,
-  onPressAccept,
-  onPressReceived,
   onPressDetail,
-  onPressWho,
 }) {
   const usersCtx = useUsers();
-  const giver = usersCtx.users.filter((user) => user.id === gift.giveUserId)[0];
+  const receiver = usersCtx.users.filter(
+    (user) => user.id === gift.receiveUserId,
+  )[0];
 
   const handlePressCancel = () => {
     onPressCancel(gift.id);
   };
 
-  const handlePressAccept = () => {
-    onPressAccept(gift.id);
-  };
-
-  const handlePressReceived = () => {
-    onPressReceived(gift.id);
-  };
-
   const handlePressDetail = () => {
     onPressDetail(gift.id);
+  };
+
+  const handlePressWho = (id) => {
+    console.log(id);
   };
 
   let button;
@@ -44,33 +39,10 @@ export default function GiverWithItem({
           <Button
             mode={'outlined'}
             onPress={handlePressCancel}
-            style={{ borderColor: GlobalStyles.colors.error, width: '48%' }}
+            style={{ borderColor: GlobalStyles.colors.error, width: '100%' }}
             textColor={GlobalStyles.colors.error}
           >
             Cancel
-          </Button>
-
-          <Button
-            mode={'contained'}
-            onPress={handlePressAccept}
-            style={{ width: '48%' }}
-          >
-            Accept
-          </Button>
-        </View>
-      </>
-    );
-  } else if (gift.status === 'Taking') {
-    button = (
-      <>
-        <Divider />
-        <View style={styles.buttonContainer}>
-          <Button
-            mode={'contained'}
-            onPress={handlePressReceived}
-            style={{ width: '100%' }}
-          >
-            Received
           </Button>
         </View>
       </>
@@ -83,11 +55,11 @@ export default function GiverWithItem({
         onPress={handlePressDetail}
         style={({ pressed }) => pressed && styles.pressed}
       >
-        <Giver
+        <Receiver
           status={gift.status}
-          id={giver.id}
-          name={giver.name}
-          onPressWho={onPressWho}
+          id={receiver.id}
+          name={receiver.name}
+          onPressWho={handlePressWho}
         />
 
         <Item

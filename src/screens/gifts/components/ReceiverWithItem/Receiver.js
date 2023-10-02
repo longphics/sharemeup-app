@@ -4,7 +4,7 @@ import { Text, Chip } from 'react-native-paper';
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
-export default function Giver({ status, id, name, onPressWho }) {
+export default function Receiver({ status, id, name, onPressWho }) {
   const handlePressWho = () => {
     onPressWho(id);
   };

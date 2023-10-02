@@ -41,3 +41,4 @@ export { default as SearchPeople } from './people/SearchPeople';
 
 export { default as Gifts } from './gifts/Gifts';
 export { default as CreateGift } from './gifts/CreateGift';
+export { default as ManageGifts } from './gifts/ManageGifts';

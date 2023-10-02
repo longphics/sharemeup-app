@@ -86,6 +86,10 @@ export default function Orders({ navigation }) {
     });
   };
 
+  const handlePressWho = (id) => {
+    console.log(id);
+  };
+
   return (
     <View style={styles.screenContainer}>
       <SegmentedButtons
@@ -116,6 +120,7 @@ export default function Orders({ navigation }) {
               key={order.id}
               onPressButton={handlePressButton}
               onPressDetail={handlePressDetail}
+              onPressWho={handlePressWho}
             />
           );
         })}

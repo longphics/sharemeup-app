@@ -27,8 +27,14 @@ export default function Checkout({ navigation, route }) {
       Alert.alert('Alert', 'Order data can not be empty');
     } else {
       createOrder(authCtx.token, storeId);
-      Alert.alert('Information', 'You have place an order');
-      navigation.navigate('Home');
+      Alert.alert('Information', 'You have place an order', [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.navigate('Home');
+          },
+        },
+      ]);
     }
   };
 

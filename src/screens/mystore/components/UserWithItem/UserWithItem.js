@@ -11,6 +11,7 @@ export default function UserWithItem({
   onPressCancel,
   onPressAccept,
   onPressDetail,
+  onPressWho,
 }) {
   const itemsCtx = useItems();
   const usersCtx = useUsers();
@@ -61,7 +62,7 @@ export default function UserWithItem({
           status={order.status}
           id={order.userId}
           name={user.name}
-          onPressDetail={onPressDetail}
+          onPressWho={onPressWho}
         />
 
         {order.orderElements.map((orderElement) => {

@@ -4,9 +4,9 @@ import { Text, Chip } from 'react-native-paper';
 import { GlobalStyles } from '~/constants';
 import { Icon } from '~/components';
 
-export default function Store({ status, id, name, onPressDetail }) {
-  const handlePressDetail = () => {
-    onPressDetail(id);
+export default function Store({ status, id, name, onPressWho }) {
+  const handlePressWho = () => {
+    onPressWho(id);
   };
 
   let chipColor;

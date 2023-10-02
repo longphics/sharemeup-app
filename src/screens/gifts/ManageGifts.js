@@ -4,19 +4,19 @@ import { SegmentedButtons } from 'react-native-paper';
 
 import { useMe, useGifts } from '~/contexts';
 
-import { GiverWithItem } from './components';
+import { ReceiverWithItem } from './components';
 
-export default function Gifts({ navigation }) {
+export default function ManageGifts() {
   const [tab, setTab] = useState('Waiting');
 
   const meCtx = useMe();
   const giftsCtx = useGifts();
 
-  const myGifts = giftsCtx.gifts.filter(
-    (gift) => gift.receiveUserId === meCtx.me.id,
+  const mySentGifts = giftsCtx.gifts.filter(
+    (gift) => gift.giveUserId === meCtx.me.id,
   );
 
-  if (!myGifts.length) {
+  if (!mySentGifts.length) {
     return (
       <View
         style={[
@@ -29,26 +29,14 @@ export default function Gifts({ navigation }) {
     );
   }
 
-  const myDisplayGifts = myGifts.filter((gift) => gift.status === tab);
+  const mySentDisplayGifts = mySentGifts.filter((gift) => gift.status === tab);
 
   const handlePressCancel = (giftId) => {
     console.log('Cancel', giftId);
   };
 
-  const handlePressAccept = (giftId) => {
-    console.log('Accept', giftId);
-  };
-
-  const handlePressReceived = (giftId) => {
-    console.log('Received', giftId);
-  };
-
   const handlePressDetail = (giftId) => {
     console.log('Detail', giftId);
-  };
-
-  const handlePressWho = (id) => {
-    console.log(id);
   };
 
   return (
@@ -66,16 +54,13 @@ export default function Gifts({ navigation }) {
       />
 
       <ScrollView>
-        {myDisplayGifts.map((gift) => {
+        {mySentDisplayGifts.map((gift) => {
           return (
-            <GiverWithItem
+            <ReceiverWithItem
               gift={gift}
               key={gift.id}
               onPressCancel={handlePressCancel}
-              onPressAccept={handlePressAccept}
-              onPressReceived={handlePressReceived}
               onPressDetail={handlePressDetail}
-              onPressWho={handlePressWho}
             />
           );
         })}
@@ -83,7 +68,6 @@ export default function Gifts({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,

@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import { GlobalStyles } from '~/constants';
 import { useAuth } from '~/contexts';
 
 export default function Menu({ navigation }) {
@@ -10,6 +11,10 @@ export default function Menu({ navigation }) {
     navigation.navigate('StoreTab', {
       screen: 'ManageStore',
     });
+  };
+
+  const handlePressManageGifts = () => {
+    navigation.navigate('ManageGifts');
   };
 
   const handlePressEditProfile = () => {
@@ -33,14 +38,28 @@ export default function Menu({ navigation }) {
 
   return (
     <View style={styles.screenContainer}>
-      <Button mode="contained-tonal" onPress={handlePressStore}>
+      <Button
+        mode="contained-tonal"
+        onPress={handlePressStore}
+        textColor={GlobalStyles.colors.primary}
+      >
         Manage Store
+      </Button>
+
+      <Button
+        mode="contained-tonal"
+        onPress={handlePressManageGifts}
+        style={{ marginTop: 12 }}
+        textColor={GlobalStyles.colors.primary}
+      >
+        Manage Gifts
       </Button>
 
       <Button
         mode="contained-tonal"
         onPress={handlePressEditProfile}
         style={{ marginTop: 12 }}
+        textColor={GlobalStyles.colors.primary}
       >
         Edit Profile
       </Button>
@@ -49,6 +68,7 @@ export default function Menu({ navigation }) {
         mode="contained-tonal"
         onPress={handlePressLogout}
         style={{ marginTop: 12 }}
+        textColor={GlobalStyles.colors.primary}
       >
         Log out
       </Button>

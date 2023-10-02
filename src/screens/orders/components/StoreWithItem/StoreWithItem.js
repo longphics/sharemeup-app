@@ -7,7 +7,12 @@ import { useItems, useStores } from '~/contexts';
 import Item from './Item';
 import Store from './Store';
 
-export default function StoreWithItem({ order, onPressButton, onPressDetail }) {
+export default function StoreWithItem({
+  order,
+  onPressButton,
+  onPressDetail,
+  onPressWho,
+}) {
   const itemsCtx = useItems();
   const storesCtx = useStores();
   const store = storesCtx.stores.filter(
@@ -71,6 +76,7 @@ export default function StoreWithItem({ order, onPressButton, onPressDetail }) {
           id={order.storeId}
           name={store.name}
           onPressDetail={onPressDetail}
+          onPressWho={onPressWho}
         />
 
         {order.orderElements.map((orderElement) => {
