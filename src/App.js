@@ -9,6 +9,7 @@ import {
   useUsers,
   useOrders,
   usePosts,
+  useGifts,
 } from './contexts';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
   const usersCtx = useUsers();
   const ordersCtx = useOrders();
   const postsCtx = usePosts();
+  const giftsCtx = useGifts();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +32,7 @@ export default function App() {
         usersCtx.refresh(),
         ordersCtx.refresh(),
         postsCtx.refresh(),
+        giftsCtx.refresh(),
       ]).then(() => {
         setIsLoading(false);
       });

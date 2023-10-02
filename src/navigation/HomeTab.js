@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Icon } from '~/components';
 import { GlobalStyles } from '~/constants';
-import { Home, Orders, Community, Messages, Menu } from '~/screens';
+import { Home, Orders, Community, Gifts, Menu } from '~/screens';
 
 import { HeaderBar, BottomBar, HomeBar } from './components';
 
@@ -58,7 +58,7 @@ export default function HomeTab() {
           tabBarLabel: 'Community',
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
-              name={focused ? 'volunteer-fill' : 'volunteer'}
+              name={focused ? 'hand-fill' : 'hand'}
               color={color}
               size={size}
             />
@@ -66,14 +66,14 @@ export default function HomeTab() {
         }}
       />
       <Tab.Screen
-        name="Messages"
-        component={Messages}
+        name="Gifts"
+        component={Gifts}
         options={{
-          title: 'Message',
-          tabBarLabel: 'Message',
+          title: 'Gifts',
+          tabBarLabel: 'Gifts',
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
-              name={focused ? 'chat-fill' : 'chat'}
+              name={focused ? 'volunteer-fill' : 'volunteer'}
               color={color}
               size={size}
             />

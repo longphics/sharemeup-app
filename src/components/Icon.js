@@ -40,6 +40,8 @@ import Dislike from '~/assets/icons/dislike.svg';
 import DislikeFill from '~/assets/icons/dislike-fill.svg';
 import Comment from '~/assets/icons/comment.svg';
 import CommentFill from '~/assets/icons/comment-fill.svg';
+import Hand from '~/assets/icons/hand.svg';
+import HandFill from '~/assets/icons/hand-fill.svg';
 
 export default function Icon({ name, color, size, style }) {
   const containerStyle = {
@@ -91,6 +93,8 @@ export default function Icon({ name, color, size, style }) {
     'dislike-fill': DislikeFill,
     'comment': Comment,
     'comment-fill': CommentFill,
+    'hand': Hand,
+    'hand-fill': HandFill,
   };
 
   const Component = Icons[name];

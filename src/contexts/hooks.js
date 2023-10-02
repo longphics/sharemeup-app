@@ -8,6 +8,7 @@ import { OrdersContext } from './orders-context';
 import { MeContext } from './me-context';
 import { AuthContext } from './auth-context';
 import { PostsContext } from './posts-context';
+import { GiftsContext } from './gifts-context';
 
 export function useCategories() {
   return useContext(CategoriesContext);
@@ -39,4 +40,8 @@ export function useAuth() {
 
 export function usePosts() {
   return useContext(PostsContext);
+}
+
+export function useGifts() {
+  return useContext(GiftsContext);
 }

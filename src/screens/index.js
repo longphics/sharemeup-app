@@ -40,6 +40,4 @@ export { default as EditProfile } from './profile/EditProfile';
 export { default as ProfileDetails } from './people/ProfileDetails';
 export { default as SearchPeople } from './people/SearchPeople';
 
-export { default as Messages } from './messages/Messages';
-export { default as SendMessage } from './messages/SendMessage';
-export { default as Notifications } from './messages/Notifications';
+export { default as Gifts } from './gifts/Gifts';

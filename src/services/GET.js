@@ -67,3 +67,12 @@ export async function fetchPosts() {
   });
   return res;
 }
+
+export async function fetchGifts() {
+  console.log('Fetch gifts');
+  const res = await axios({
+    method: 'GET',
+    url: backendConfig.url + '/gifts',
+  });
+  return res;
+}
