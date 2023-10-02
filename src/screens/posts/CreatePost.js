@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 
 import { useMe, usePosts } from '~/contexts';
 import { createPost } from '~/services';
