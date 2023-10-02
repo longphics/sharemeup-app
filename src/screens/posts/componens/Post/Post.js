@@ -50,7 +50,7 @@ export default function Post({ post, onPressSend }) {
         {post.text}
       </Text>
       <Image source={{ uri: post.images[0] }} style={styles.image} />
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <IconButton
           icon={({ size, color }) => (
             <Icon name="heart" size={size} color={color} />
@@ -66,7 +66,7 @@ export default function Post({ post, onPressSend }) {
             <Icon name="comment" size={size} color={color} />
           )}
         />
-      </View>
+      </View> */}
     </View>
   );
 }

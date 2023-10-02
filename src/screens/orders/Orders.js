@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView, Alert } from 'react-native';
 import { SegmentedButtons, Text } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useMe, useOrders } from '~/contexts';
+import { useMe, useOrders, useStores } from '~/contexts';
 import { changeOrderStatus } from '~/services';
 
 import { StoreWithItem } from './components';
@@ -11,6 +11,7 @@ import { StoreWithItem } from './components';
 export default function Orders({ navigation }) {
   const meCtx = useMe();
   const ordersCtx = useOrders();
+  const storesCtx = useStores();
 
   const isFocus = useIsFocused();
 
@@ -70,6 +71,7 @@ export default function Orders({ navigation }) {
         onPress: async () => {
           await changeOrderStatus(orderId, 'Received');
           ordersCtx.refresh();
+          storesCtx.refresh();
         },
       },
     ]);
