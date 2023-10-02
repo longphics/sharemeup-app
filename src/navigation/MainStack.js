@@ -17,6 +17,7 @@ import {
   Register,
   CreateGift,
   ManageGifts,
+  CreatePost,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -151,6 +152,13 @@ export default function MainStack() {
             component={ManageGifts}
             options={{
               title: 'Manage Gifts',
+            }}
+          />
+          <Stack.Screen
+            name="CreatePost"
+            component={CreatePost}
+            options={{
+              title: 'Create New Post',
             }}
           />
         </>

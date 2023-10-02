@@ -208,3 +208,32 @@ export async function changeGiftStatus(giftId, status) {
 
   return res;
 }
+
+export async function createPost(data) {
+  console.log('Create post');
+
+  const form = new FormData();
+
+  for (const key in data) {
+    if (key !== 'imageUri') {
+      form.append(key, data[key]);
+    }
+  }
+
+  form.append('file', {
+    uri: data.imageUri,
+    type: 'image/jpg',
+    name: 'image.jpg',
+  });
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/posts/create',
+    data: form,
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  });
+
+  return res;
+}

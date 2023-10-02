@@ -30,6 +30,7 @@ export { default as Community } from './posts/Community';
 export { default as PostDetails } from './posts/PostDetails';
 export { default as SavedPosts } from './posts/SavedPosts';
 export { default as SearchPosts } from './posts/SearchPosts';
+export { default as CreatePost } from './posts/CreatePost';
 
 export { default as Menu } from './profile/Menu';
 export { default as Profile } from './profile/Profile';

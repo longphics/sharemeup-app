@@ -5,6 +5,8 @@ import { useIsFocused } from '@react-navigation/native';
 import { usePosts } from '~/contexts';
 
 import { Post } from './componens';
+import { Button } from 'react-native-paper';
+import { GlobalStyles } from '~/constants';
 
 export default function Commmunity({ navigation }) {
   const postCtx = usePosts();
@@ -24,9 +26,21 @@ export default function Commmunity({ navigation }) {
     });
   };
 
+  const handleCreatePost = () => {
+    navigation.navigate('CreatePost');
+  };
+
   return (
     <ScrollView>
       <View style={styles.screenContainer}>
+        <Button
+          mode="contained-tonal"
+          onPress={handleCreatePost}
+          style={{ marginHorizontal: 12, marginVertical: 6 }}
+          textColor={GlobalStyles.colors.primary}
+        >
+          Create new post
+        </Button>
         <View style={styles.postList}>
           {postCtx.posts.map((post) => (
             <Post post={post} key={post.id} onPressSend={handlePressSend} />
