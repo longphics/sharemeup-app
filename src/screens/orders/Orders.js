@@ -76,7 +76,12 @@ export default function Orders({ navigation }) {
   };
 
   const handlePressFeedback = (orderId) => {
-    console.log('Feedback', orderId);
+    const order = myOrders.filter((order) => order.id === orderId)[0];
+    const itemId = order.orderElements[0].itemId;
+
+    navigation.navigate('Feedback', {
+      itemId,
+    });
   };
 
   const handlePressDetail = (orderId) => {

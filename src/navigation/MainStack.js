@@ -19,6 +19,7 @@ import {
   ManageGifts,
   CreatePost,
   ProfileDetails,
+  Feedback,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -167,6 +168,13 @@ export default function MainStack() {
             component={ProfileDetails}
             options={{
               title: 'Profile Details',
+            }}
+          />
+          <Stack.Screen
+            name="Feedback"
+            component={Feedback}
+            options={{
+              title: 'Feedback',
             }}
           />
         </>

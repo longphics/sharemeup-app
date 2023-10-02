@@ -12,6 +12,7 @@ export { default as Checkout } from './cart/Checkout';
 
 export { default as Orders } from './orders/Orders';
 export { default as OrderDetails } from './orders/OrderDetails';
+export { default as Feedback } from './orders/Feedback';
 
 export { default as SearchStores } from './stores/SearchStores';
 export { default as StoreDetails } from './stores/StoreDetails';

@@ -237,3 +237,22 @@ export async function createPost(data) {
 
   return res;
 }
+
+export async function createFeedback(itemId, userId, star, text) {
+  console.log('Create feedback');
+
+  const data = {
+    itemId,
+    userId,
+    star,
+    text,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/orders/feedback',
+    data,
+  });
+
+  return res;
+}
