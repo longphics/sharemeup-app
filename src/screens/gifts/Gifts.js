@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { SegmentedButtons } from 'react-native-paper';
+import { StyleSheet, View, ScrollView, Alert } from 'react-native';
+import { SegmentedButtons, Text } from 'react-native-paper';
 
 import { useMe, useGifts } from '~/contexts';
+import { changeGiftStatus } from '~/services';
 
 import { GiverWithItem } from './components';
 
@@ -31,16 +32,64 @@ export default function Gifts({ navigation }) {
 
   const myDisplayGifts = myGifts.filter((gift) => gift.status === tab);
 
-  const handlePressCancel = (giftId) => {
-    console.log('Cancel', giftId);
+  const handlePressCancel = async (giftId) => {
+    Alert.alert('Confirm', 'Do you want to cancel this gift', [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          try {
+            await changeGiftStatus(giftId, 'Canceled');
+            giftsCtx.refresh();
+          } catch (err) {
+            Alert.alert('Error', 'Some error occur when cancel this gift');
+          }
+        },
+      },
+    ]);
   };
 
   const handlePressAccept = (giftId) => {
-    console.log('Accept', giftId);
+    Alert.alert('Confirm', 'Do you want to accept this gift', [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          try {
+            await changeGiftStatus(giftId, 'Taking');
+            giftsCtx.refresh();
+          } catch (err) {
+            Alert.alert('Error', 'Some error occur when cancel this gift');
+          }
+        },
+      },
+    ]);
   };
 
   const handlePressReceived = (giftId) => {
-    console.log('Received', giftId);
+    Alert.alert('Confirm', 'Have you received this gift', [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          try {
+            await changeGiftStatus(giftId, 'Received');
+            giftsCtx.refresh();
+          } catch (err) {
+            Alert.alert('Error', 'Some error occur when cancel this gift');
+          }
+        },
+      },
+    ]);
   };
 
   const handlePressDetail = (giftId) => {

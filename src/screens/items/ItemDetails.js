@@ -75,13 +75,14 @@ export default function ItemDetails({ navigation, route }) {
         <FeedbackList {...feedbackListProps} />
       </ScrollView>
 
-      <SelectItem
-        itemId={item.id}
-        stock={item.stock}
-        onPressCart={handlePressCart}
-        onPressPick={handlePressPick}
-        isCanBuy={itemStoreId !== myStoreId}
-      />
+      {itemStoreId !== myStoreId && (
+        <SelectItem
+          itemId={item.id}
+          stock={item.stock}
+          onPressCart={handlePressCart}
+          onPressPick={handlePressPick}
+        />
+      )}
     </View>
   );
 }

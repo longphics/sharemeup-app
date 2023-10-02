@@ -10,44 +10,35 @@ export default function SelectItem({
   stock,
   onPressCart,
   onPressPick,
-  isCanBuy,
 }) {
   const [amount, setAmount] = useState(1);
 
   const handlePressAdd = () => {
-    if (isCanBuy) {
-      if (amount === stock) {
-        Alert.alert('Alert', 'Over stock');
-      } else {
-        setAmount((prev) => prev + 1);
-      }
+    if (amount === stock) {
+      Alert.alert('Alert', 'Over stock');
+    } else {
+      setAmount((prev) => prev + 1);
     }
   };
 
   const handlePressMinus = () => {
-    if (isCanBuy) {
-      if (amount === 1) {
-        return;
-      } else {
-        setAmount((prev) => prev - 1);
-      }
+    if (amount === 1) {
+      return;
+    } else {
+      setAmount((prev) => prev - 1);
     }
   };
 
   const handlePressCart = () => {
-    if (isCanBuy) {
-      onPressCart(itemId, amount);
-    }
+    onPressCart(itemId, amount);
   };
 
   const handlePressPick = () => {
-    if (isCanBuy) {
-      onPressPick(itemId, amount);
-    }
+    onPressPick(itemId, amount);
   };
 
   return (
-    <View style={[styles.container, { opacity: isCanBuy ? 1 : 0.5 }]}>
+    <View style={styles.container}>
       <View style={styles.adjustContainer}>
         <ButtonAddMinus
           amount={amount}

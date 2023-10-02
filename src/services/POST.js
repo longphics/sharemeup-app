@@ -191,3 +191,20 @@ export async function createGift(data) {
 
   return res;
 }
+
+export async function changeGiftStatus(giftId, status) {
+  console.log('Change gift status');
+
+  const data = {
+    giftId,
+    status,
+  };
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/gifts/status',
+    data,
+  });
+
+  return res;
+}
