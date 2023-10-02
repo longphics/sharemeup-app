@@ -85,8 +85,8 @@ export default function HomeTab() {
         name="Menu"
         component={Menu}
         options={{
-          title: 'Profile',
-          tabBarLabel: 'Profile',
+          title: 'Menu',
+          tabBarLabel: 'Menu',
           tabBarIcon: ({ color, size, focused }) => {
             return (
               <Icon
