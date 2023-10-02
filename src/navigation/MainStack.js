@@ -18,6 +18,7 @@ import {
   CreateGift,
   ManageGifts,
   CreatePost,
+  ProfileDetails,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -159,6 +160,13 @@ export default function MainStack() {
             component={CreatePost}
             options={{
               title: 'Create New Post',
+            }}
+          />
+          <Stack.Screen
+            name="ProfileDetails"
+            component={ProfileDetails}
+            options={{
+              title: 'Profile Details',
             }}
           />
         </>

@@ -54,7 +54,6 @@ export default function Commmunity({ navigation }) {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    // backgroundColor: 'green',
   },
   postList: {
     marginHorizontal: 12,

@@ -7,6 +7,10 @@ import { useAuth } from '~/contexts';
 export default function Menu({ navigation }) {
   const authCtx = useAuth();
 
+  const handlePressProfile = () => {
+    navigation.navigate('ProfileDetails');
+  };
+
   const handlePressStore = () => {
     navigation.navigate('StoreTab', {
       screen: 'ManageStore',
@@ -40,10 +44,19 @@ export default function Menu({ navigation }) {
     <View style={styles.screenContainer}>
       <Button
         mode="contained-tonal"
-        onPress={handlePressStore}
+        onPress={handlePressProfile}
         textColor={GlobalStyles.colors.primary}
       >
-        Manage Store
+        See my profile
+      </Button>
+
+      <Button
+        mode="contained-tonal"
+        onPress={handlePressStore}
+        style={{ marginTop: 12 }}
+        textColor={GlobalStyles.colors.primary}
+      >
+        Go to my store
       </Button>
 
       <Button
@@ -52,7 +65,7 @@ export default function Menu({ navigation }) {
         style={{ marginTop: 12 }}
         textColor={GlobalStyles.colors.primary}
       >
-        Manage Gifts
+        View sent gifts
       </Button>
 
       <Button
@@ -61,7 +74,7 @@ export default function Menu({ navigation }) {
         style={{ marginTop: 12 }}
         textColor={GlobalStyles.colors.primary}
       >
-        Edit Profile
+        Edit my profile
       </Button>
 
       <Button
@@ -70,7 +83,7 @@ export default function Menu({ navigation }) {
         style={{ marginTop: 12 }}
         textColor={GlobalStyles.colors.primary}
       >
-        Log out
+        Logout
       </Button>
     </View>
   );

@@ -2,11 +2,12 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Text, Avatar, IconButton, Chip } from 'react-native-paper';
 import { Icon } from '~/components';
 
-import { useUsers } from '~/contexts';
+import { useMe, useUsers } from '~/contexts';
 import { formatDate } from '~/utils';
 import { GlobalStyles } from '~/constants';
 
 export default function Post({ post, onPressSend }) {
+  const meCtx = useMe();
   const usersCtx = useUsers();
   const createUser = usersCtx.users.filter(
     (user) => user.id === post.createUserId,
@@ -28,20 +29,22 @@ export default function Post({ post, onPressSend }) {
           <Text variant="bodyLarge">{createUser.name}</Text>
           <Text variant="labelSmall">{formatDate(post.createAt)}</Text>
         </View>
-        <Chip
-          mode="outlined"
-          selectedColor={GlobalStyles.colors.tertiary}
-          style={{
-            backgroundColor: 'transparent',
-            width: 105,
-            borderColor: GlobalStyles.colors.tertiary,
-            borderRadius: 12,
-          }}
-          textStyle={{ flex: 1, textAlign: 'center' }}
-          onPress={handlePressSendGift}
-        >
-          Send Gift
-        </Chip>
+        {meCtx.me.id !== createUser.id && (
+          <Chip
+            mode="outlined"
+            selectedColor={GlobalStyles.colors.tertiary}
+            style={{
+              backgroundColor: 'transparent',
+              width: 105,
+              borderColor: GlobalStyles.colors.tertiary,
+              borderRadius: 12,
+            }}
+            textStyle={{ flex: 1, textAlign: 'center' }}
+            onPress={handlePressSendGift}
+          >
+            Send Gift
+          </Chip>
+        )}
       </View>
       <Text variant="bodyLarge" style={styles.caption}>
         {post.text}
