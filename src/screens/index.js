@@ -28,7 +28,6 @@ export { default as EditStore } from './mystore/EditStore';
 
 export { default as Community } from './posts/Community';
 export { default as PostDetails } from './posts/PostDetails';
-export { default as CreateGift } from './posts/CreateGift';
 export { default as SavedPosts } from './posts/SavedPosts';
 export { default as SearchPosts } from './posts/SearchPosts';
 
@@ -41,3 +40,4 @@ export { default as ProfileDetails } from './people/ProfileDetails';
 export { default as SearchPeople } from './people/SearchPeople';
 
 export { default as Gifts } from './gifts/Gifts';
+export { default as CreateGift } from './gifts/CreateGift';

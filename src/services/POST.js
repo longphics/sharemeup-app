@@ -162,3 +162,32 @@ export async function register(email, name, phone, address, password) {
 
   return res;
 }
+
+export async function createGift(data) {
+  console.log('Create gift');
+
+  const form = new FormData();
+
+  for (const key in data) {
+    if (key !== 'imageUri') {
+      form.append(key, data[key]);
+    }
+  }
+
+  form.append('file', {
+    uri: data.imageUri,
+    type: 'image/jpg',
+    name: 'image.jpg',
+  });
+
+  const res = await axios({
+    method: 'POST',
+    url: backendConfig.url + '/gifts/create',
+    data: form,
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  });
+
+  return res;
+}

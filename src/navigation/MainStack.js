@@ -15,6 +15,7 @@ import {
   EditProfile,
   EditStore,
   Register,
+  CreateGift,
 } from '~/screens';
 import { GlobalStyles } from '~/constants';
 import { listener } from '~/utils';
@@ -135,6 +136,13 @@ export default function MainStack() {
             component={EditStore}
             options={{
               title: 'Edit Store',
+            }}
+          />
+          <Stack.Screen
+            name="CreateGift"
+            component={CreateGift}
+            options={{
+              title: 'Create Gift',
             }}
           />
         </>

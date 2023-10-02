@@ -6,14 +6,14 @@ import { useUsers } from '~/contexts';
 import { formatDate } from '~/utils';
 import { GlobalStyles } from '~/constants';
 
-export default function Post({ post }) {
+export default function Post({ post, onPressSend }) {
   const usersCtx = useUsers();
   const createUser = usersCtx.users.filter(
     (user) => user.id === post.createUserId,
   )[0];
 
-  const handlePressNeedHelp = () => {
-    console.log('Need help');
+  const handlePressSendGift = () => {
+    onPressSend(post.createUserId, post.id);
   };
 
   return (
@@ -38,8 +38,9 @@ export default function Post({ post }) {
             borderRadius: 12,
           }}
           textStyle={{ flex: 1, textAlign: 'center' }}
+          onPress={handlePressSendGift}
         >
-          Need Help
+          Send Gift
         </Chip>
       </View>
       <Text variant="bodyLarge" style={styles.caption}>

@@ -6,7 +6,7 @@ import { usePosts } from '~/contexts';
 
 import { Post } from './componens';
 
-export default function Commmunity() {
+export default function Commmunity({ navigation }) {
   const postCtx = usePosts();
 
   const isFocus = useIsFocused();
@@ -17,12 +17,19 @@ export default function Commmunity() {
     }
   }, [isFocus]);
 
+  const handlePressSend = (createUserId, postId) => {
+    navigation.navigate('CreateGift', {
+      receiverId: createUserId,
+      postId,
+    });
+  };
+
   return (
     <ScrollView>
       <View style={styles.screenContainer}>
         <View style={styles.postList}>
           {postCtx.posts.map((post) => (
-            <Post post={post} key={post.id} />
+            <Post post={post} key={post.id} onPressSend={handlePressSend} />
           ))}
         </View>
       </View>
